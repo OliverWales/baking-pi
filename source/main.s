@@ -25,12 +25,39 @@ mov r1,#1
 lsl r1,#16
 
 /* 
-* Set GPIO 16 to low
+* We'll be back
+*/
+loop$:
+
+/* 
+* Set GPIO 16 to low (LED on)
 */
 str r1,[r0,#40]
 
 /*
+* Wait
+*/
+mov r2,#0x3F0000
+wait1$:
+sub r2,#1
+cmp r2,#0
+bne wait1$
+
+/* 
+* Set GPIO 16 to high (LED off)
+*/
+str r1,[r0,#28]
+
+/*
+* Wait
+*/
+mov r2,#0x3F0000
+wait2$:
+sub r2,#1
+cmp r2,#0
+bne wait2$
+
+/*
 * Loop forever
 */
-loop$:
 b loop$
