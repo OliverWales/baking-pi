@@ -26,14 +26,11 @@ main:
         .unreq pinNum
         .unreq pinVal
 
-        /* Wait */
-        decr .req r0
-        mov decr,#0x3F0000
-        wait1$: 
-            sub decr,#1
-            teq decr,#0
-            bne wait1$
-        .unreq decr
+        /* Wait 0.5 seconds */
+        duration .req r0
+        mov pinNum,#500000
+        bl Wait
+        .unreq duration
 
         /* Set pin 16 high (LED off) */
         pinNum .req r0
@@ -44,14 +41,11 @@ main:
         .unreq pinNum
         .unreq pinVal
 
-        /* Wait */
-        decr .req r0
-        mov decr,#0x3F0000
-        wait2$: 
-            sub decr,#1
-            teq decr,#0
-            bne wait2$
-        .unreq decr
+        /* Wait 0.5 seconds */
+        duration .req r0
+        mov pinNum,#500000
+        bl Wait
+        .unreq duration
 
         /* Loop forever */
         b loop
