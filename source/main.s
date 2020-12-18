@@ -1,63 +1,47 @@
 .section .init
 .globl _start
 _start:
+    b main
 
-/* 
-* Address of GPIO region
-*/
-ldr r0,=0x20200000
+.section .text
+main:
+    mov sp,#0x8000
 
-/* 
-* Set bits 18-20 of r1 to 001
-*/
-mov r1,#1
-lsl r1,#18
+    /* Set pin 16 high */
+    pinNum .req r0
+    pinFunc .req r1
+    mov pinNum,#16
+    mov pinFunc,#1
+    bl SetGpioFunction
+    .unreq pinNum
+    .unreq pinFunc
 
-/* 
-* Set the GPIO function select
-*/
-str r1,[r0,#4]
+    /* Wait */
+    decr .req r0
+    mov decr,#0x3F0000
+    wait1$: 
+        sub decr,#1
+        teq decr,#0
+        bne wait1$
+    .unreq decr
 
-/* 
-* Set the 16th bit of r1
-*/
-mov r1,#1
-lsl r1,#16
+    /* Set pin 16 low */
+    pinNum .req r0
+    pinVal .req r1
+    mov pinNum,#16
+    mov pinVal,#0
+    bl SetGpio
+    .unreq pinNum
+    .unreq pinVal
 
-/* 
-* We'll be back
-*/
-loop$:
+    /* Wait */
+    decr .req r0
+    mov decr,#0x3F0000
+    wait2$: 
+        sub decr,#1
+        teq decr,#0
+        bne wait2$
+    .unreq decr
 
-/* 
-* Set GPIO 16 to low (LED on)
-*/
-str r1,[r0,#40]
-
-/*
-* Wait
-*/
-mov r2,#0x3F0000
-wait1$:
-sub r2,#1
-cmp r2,#0
-bne wait1$
-
-/* 
-* Set GPIO 16 to high (LED off)
-*/
-str r1,[r0,#28]
-
-/*
-* Wait
-*/
-mov r2,#0x3F0000
-wait2$:
-sub r2,#1
-cmp r2,#0
-bne wait2$
-
-/*
-* Loop forever
-*/
-b loop$
+    /* Loop forever */
+    b main
