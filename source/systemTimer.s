@@ -14,7 +14,7 @@ GetSystemTimerAddress:
 .globl GetSystemTimerValue
 GetTimeStamp:
     push {lr}
-    bl GetSystemTimerBase
+    bl GetSystemTimerAddress
     ldrd r0,r1,[r0,#4]
     pop {pc}
 

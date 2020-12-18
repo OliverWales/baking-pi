@@ -28,7 +28,7 @@ main:
 
         /* Wait 0.5 seconds */
         duration .req r0
-        mov pinNum,#500000
+        ldr duration,=500000
         bl Wait
         .unreq duration
 
@@ -43,7 +43,7 @@ main:
 
         /* Wait 0.5 seconds */
         duration .req r0
-        mov pinNum,#500000
+        ldr duration,=500000
         bl Wait
         .unreq duration
 
