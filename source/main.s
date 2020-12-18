@@ -47,10 +47,10 @@ main:
         /* Wait */
         decr .req r0
         mov decr,#0x3F0000
-        wait1$: 
+        wait2$: 
             sub decr,#1
             teq decr,#0
-            bne wait1$
+            bne wait2$
         .unreq decr
 
         /* Loop forever */
