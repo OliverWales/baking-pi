@@ -1,9 +1,9 @@
 /*
-* GetGpioAddress returns the base address of the GPIO region as a physical address
+* GetGpioBase returns the base address of the GPIO region as a physical address
 * in register r0
 */
-.globl GetGpioAddress
-GetGpioAddress:
+.globl GetGpioBase
+GetGpioBase:
     ldr r0,=0x20200000
     mov pc,lr
 
@@ -21,12 +21,12 @@ SetGpioFunction:
     cmpls pinFunc,#7
     movhi pc,lr
 
-    /* Push lr to stack, move pinNum to r2 and call GetGpioAddress */
+    /* Push lr to stack, move pinNum to r2 and call GetGpioBase */
     push {lr}
     mov r2,pinNum
     .unreq pinNum
 	pinNum .req r2
-    bl GetGpioAddress
+    bl GetGpioBase
     gpioAddr .req r0
 
     /* Pin function address = gpioAddress + 4 × (Pin Number ÷ 10) */
