@@ -28,14 +28,13 @@ main:
     loop:
         /* Get current value in pattern */
         pinVal .req r1
-        mov r1,#1
-        lsl r1,seq
-        and r1,ptrn
+        mov pinVal,#1
+        lsl pinVal,seq
+        and pinVal,ptrn
 
         /* Set pin 16 to that value */
         pinNum .req r0
         mov pinNum,#16
-        mov pinVal,#0
         bl SetGpio
         .unreq pinNum
         .unreq pinVal
