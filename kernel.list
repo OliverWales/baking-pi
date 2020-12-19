@@ -84,17 +84,21 @@ Disassembly of section .text:
     80e0:	e3a00010 	mov	r0, #16
     80e4:	e3a01001 	mov	r1, #1
     80e8:	ebffffd7 	bl	804c <SetGpioFunction>
+    80ec:	e59f4030 	ldr	r4, [pc, #48]	; 8124 <loop+0x2c>
+    80f0:	e5944000 	ldr	r4, [r4]
+    80f4:	e3a05000 	mov	r5, #0
 
-000080ec <loop>:
-    80ec:	e3a00010 	mov	r0, #16
-    80f0:	e3a01000 	mov	r1, #0
-    80f4:	ebffffe8 	bl	809c <SetGpio>
-    80f8:	e59f0018 	ldr	r0, [pc, #24]	; 8118 <loop+0x2c>
-    80fc:	ebffffc6 	bl	801c <Wait>
-    8100:	e3a00010 	mov	r0, #16
-    8104:	e3a01001 	mov	r1, #1
-    8108:	ebffffe3 	bl	809c <SetGpio>
-    810c:	e59f0004 	ldr	r0, [pc, #4]	; 8118 <loop+0x2c>
-    8110:	ebffffc1 	bl	801c <Wait>
-    8114:	eafffff4 	b	80ec <loop>
-    8118:	0007a120 	.word	0x0007a120
+000080f8 <loop>:
+    80f8:	e3a01001 	mov	r1, #1
+    80fc:	e1a01511 	lsl	r1, r1, r5
+    8100:	e0011004 	and	r1, r1, r4
+    8104:	e3a00010 	mov	r0, #16
+    8108:	e3a01000 	mov	r1, #0
+    810c:	ebffffe2 	bl	809c <SetGpio>
+    8110:	e59f0010 	ldr	r0, [pc, #16]	; 8128 <loop+0x30>
+    8114:	ebffffc0 	bl	801c <Wait>
+    8118:	e2855001 	add	r5, r5, #1
+    811c:	e205501f 	and	r5, r5, #31
+    8120:	eafffff4 	b	80f8 <loop>
+    8124:	0000812c 	.word	0x0000812c
+    8128:	0003d090 	.word	0x0003d090
