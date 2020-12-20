@@ -25,7 +25,7 @@ main:
     bl SetGpio
 
     error$:
-    b error$
+        b error$
 
     /* Move frame buffer info address in r4 */
     noError$:
@@ -65,8 +65,10 @@ main:
             /* Increment colour */
             add colour,#1
             teq y,#0
-            
             bne drawRow$
 
         /* Loop forever */
         b render$
+
+        .unreq frameBufferAddr
+        .unreq frameBufferInfoAddr

@@ -21,17 +21,18 @@ MailboxWrite:
     cmp r1,#15
     movhi pc,lr
 
-    /* Combine value with channel */
     channel .req r1
     value .req r2
     mov value,r0
-    add value,channel
-    .unreq channel
+    push {lr}
 
     /* Get mailbox base address */
-    push {lr}
     bl GetMailboxBase
     mailbox .req r0
+
+    /* Combine value with channel */
+    add value,channel
+    .unreq channel
 
     /* Wait for top bit of status to be 0 */
     wait1$:

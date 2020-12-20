@@ -108,4 +108,3 @@ SetGpio:
     .unreq setBit
     .unreq gpioAddr
     pop {pc}
-
