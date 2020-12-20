@@ -83,7 +83,7 @@ SetGpio:
     mov r2,pinNum
     .unreq pinNum
     pinNum .req r2
-    bl GetGpioAddress
+    bl GetGpioBase
     gpioAddr .req r0
 
     /* pinBank = gpioAddr + (pinNum / 32) * 4 */
