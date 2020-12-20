@@ -7,52 +7,66 @@ _start:
 main:
     mov sp,#0x8000
 
-    /* Set pin 16 function */
-    pinNum .req r0
-    pinFunc .req r1
-    mov pinNum,#16
-    mov pinFunc,#1
+    /* Initialise frame buffer */
+    mov r0,#1024
+    mov r1,#768
+    mov r2,#16
+    bl InitialiseFrameBuffer
+
+    teq r0,#0
+    bne noError$
+
+    /* Turn on LED and loop if error */
+    mov r0,#16
+    mov r1,#1
     bl SetGpioFunction
-    .unreq pinNum
-    .unreq pinFunc
+    mov r0,#16
+    mov r1,#0
+    bl SetGpio
 
-    /* Load pattern into r4 */
-    ptrn .req r4
-    ldr ptrn,=pattern
-    ldr ptrn,[ptrn]
+    error$:
+    b error$
 
-    /* Index into pattern stored in r5 */
-    seq .req r5
-    mov seq,#0
+    /* Move frame buffer info address in r4 */
+    noError$:
+    frameBufferInfoAddr .req r4
+    mov frameBufferInfoAddr,r0
 
-    loop:
-        /* Get current value in pattern */
-        pinVal .req r1
-        mov pinVal,#1
-        lsl pinVal,seq
-        and pinVal,ptrn
+    render$:
+        /* Get address of frame buffer */
+        frameBufferAddr .req r3
+        ldr frameBufferAddr,[frameBufferInfoAddr,#32]
 
-        /* Set pin 16 to that value */
-        pinNum .req r0
-        mov pinNum,#16
-        bl SetGpio
-        .unreq pinNum
-        .unreq pinVal
+        colour .req r0
+        y .req r1
+        mov y,#768
 
-        /* Wait 0.25 seconds */
-        duration .req r0
-        ldr duration,=250000
-        bl Wait
-        .unreq duration
+        /* Loop over rows */
+        drawRow$:
+            x .req r2
+            mov x,#1024
 
-        /* Increment index and reset if >= 32 */
-        add seq,#1
-        and seq,#0b11111
+            /* Loop over columns */
+            drawPixel$:
+                /* Write pixel */
+                strh colour,[frameBufferAddr]
+
+                /* Increment frame buffer */
+                add frameBufferAddr,#2
+
+                /* Decrement x */
+                sub x,#1
+                teq x,#0
+                bne drawPixel$
+
+            /* Decrement y */
+            sub y,#1
+
+            /* Increment colour */
+            add colour,#1
+            teq y,#0
+            
+            bne drawRow$
 
         /* Loop forever */
-        b loop
-
-.section .data
-.align 2
-pattern:
-    .int 0b11111111101010100010001000101010
+        b render$
