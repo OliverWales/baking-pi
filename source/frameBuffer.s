@@ -1,5 +1,5 @@
 .section .data
-.align 12 /* GPU requires page alignment */
+.align 4
 .globl FrameBufferInfo
 FrameBufferInfo:
     .int 1024   /* #00 Physical Width */

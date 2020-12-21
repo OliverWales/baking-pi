@@ -73,7 +73,7 @@ Disassembly of section .text:
     80cc:	149df004 	popne	{pc}		; (ldrne pc, [sp], #4)
     80d0:	e1a00004 	mov	r0, r4
     80d4:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
-    80d8:	00009000 	.word	0x00009000
+    80d8:	00008230 	.word	0x00008230
 
 000080dc <GetSystemTimerAddress>:
     80dc:	e59f0034 	ldr	r0, [pc, #52]	; 8118 <loop$+0x14>

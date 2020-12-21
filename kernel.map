@@ -52,14 +52,14 @@ LOAD build/main.o
                 0x0000000000008174                SetGpio
  .text          0x00000000000081b4       0x70 build/main.o
 
-.data           0x0000000000009000       0x28
+.data           0x0000000000008230       0x28
  *(.data)
- .data          0x0000000000009000        0x0 build/mailbox.o
- .data          0x0000000000009000       0x28 build/frameBuffer.o
-                0x0000000000009000                FrameBufferInfo
- .data          0x0000000000009028        0x0 build/systemTimer.o
- .data          0x0000000000009028        0x0 build/gpio.o
- .data          0x0000000000009028        0x0 build/main.o
+ .data          0x0000000000008230        0x0 build/mailbox.o
+ .data          0x0000000000008230       0x28 build/frameBuffer.o
+                0x0000000000008230                FrameBufferInfo
+ .data          0x0000000000008258        0x0 build/systemTimer.o
+ .data          0x0000000000008258        0x0 build/gpio.o
+ .data          0x0000000000008258        0x0 build/main.o
 
 /DISCARD/
  *(*)
