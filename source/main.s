@@ -27,49 +27,44 @@ main:
     error$:
         b error$
 
-    /* Move frame buffer info address in r4 */
+    /* Set graphics address */
     noError$:
     frameBufferInfoAddr .req r4
     mov frameBufferInfoAddr,r0
+    bl SetGraphicsAddress
 
-    render$:
-        /* Get address of frame buffer */
-        frameBufferAddr .req r3
-        ldr frameBufferAddr,[frameBufferInfoAddr,#32]
+    /* Test setting some pixels */
+    px .req r0
+    px .req r1
 
-        colour .req r0
-        y .req r1
-        mov y,#768
+    mov px,#1
+    mov py,#0
+    bl SetPixel
 
-        /* Loop over rows */
-        drawRow$:
-            x .req r2
-            mov x,#1024
+    mov px,#3
+    mov py,#0
+    bl SetPixel
 
-            /* Loop over columns */
-            drawPixel$:
-                /* Write pixel */
-                strh colour,[frameBufferAddr]
+    mov px,#0
+    mov py,#2
+    bl SetPixel
 
-                /* Increment frame buffer address */
-                add frameBufferAddr,#2
+    mov px,#4
+    mov py,#2
+    bl SetPixel
 
-                /* Decrement x */
-                sub x,#1
-                teq x,#0
-                bne drawPixel$
+    mov px,#1
+    mov py,#3
+    bl SetPixel
 
-            /* Decrement y */
-            sub y,#1
+    mov px,#2
+    mov py,#3
+    bl SetPixel
 
-            /* Increment colour */
-            add colour,#1
-            teq y,#0
-            bne drawRow$
+    mov px,#3
+    mov py,#3
+    bl SetPixel
 
-        /* Loop forever */
-        b render$
-
-        .unreq frameBufferAddr
-        .unreq frameBufferInfoAddr
-
+    /* Loop forever */
+    loop$:
+        b loop$
