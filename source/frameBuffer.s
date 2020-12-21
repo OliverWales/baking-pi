@@ -45,7 +45,7 @@ InitialiseFrameBuffer:
     mov r0,frameBufferInfoAddr
     add r0,#0x40000000 /* add 0x40000000 to instruct GPU to flush cache */
     mov r1,#1
-    push {lr}
+    push {r4,lr}
     bl MailboxWrite
 
     /* Read channel 1 */
@@ -55,10 +55,10 @@ InitialiseFrameBuffer:
     /* Return 0 if did not succeed */
     teq result,#0
     movne result,#0
-    popne {pc}
+    popne {r4,pc}
 
     /* Return the frame buffer info address*/
     mov result,frameBufferInfoAddr
-    pop {pc}
+    pop {r4,pc}
     .unreq result
     .unreq frameBufferInfoAddr
