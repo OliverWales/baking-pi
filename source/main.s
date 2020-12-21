@@ -34,37 +34,38 @@ main:
     bl SetGraphicsAddress
 
     /* Test setting some pixels */
-    px .req r0
-    px .req r1
+    x .req r0
+    y .req r1
 
-    mov px,#1
-    mov py,#0
+    mov x,#1
+    mov y,#0
     bl SetPixel
 
-    mov px,#3
-    mov py,#0
+    mov x,#3
+    mov y,#0
     bl SetPixel
 
-    mov px,#0
-    mov py,#2
+    mov x,#0
+    mov y,#2
     bl SetPixel
 
-    mov px,#4
-    mov py,#2
+    mov x,#4
+    mov y,#2
     bl SetPixel
 
-    mov px,#1
-    mov py,#3
+    mov x,#1
+    mov y,#3
     bl SetPixel
 
-    mov px,#2
-    mov py,#3
+    mov x,#2
+    mov y,#3
     bl SetPixel
 
-    mov px,#3
-    mov py,#3
+    mov x,#3
+    mov y,#3
     bl SetPixel
 
     /* Loop forever */
     loop$:
         b loop$
+
