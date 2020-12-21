@@ -1,4 +1,7 @@
 .section .data
+/*
+* Template request to the graphics processor for a frame buffer
+*/
 .align 4
 .globl FrameBufferInfo
 FrameBufferInfo:
@@ -14,6 +17,9 @@ FrameBufferInfo:
     .int 0      /* #36 GPU - Size of frame buffer */
 
 .section .text
+/*
+* Initialise a frame buffer of the given width, height and colour depth
+*/
 .globl InitialiseFrameBuffer
 InitialiseFrameBuffer:
     /* Check that arguements are in range */
