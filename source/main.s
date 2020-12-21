@@ -51,7 +51,7 @@ main:
                 /* Write pixel */
                 strh colour,[frameBufferAddr]
 
-                /* Increment frame buffer */
+                /* Increment frame buffer address */
                 add frameBufferAddr,#2
 
                 /* Decrement x */

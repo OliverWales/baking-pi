@@ -30,7 +30,7 @@ InitialiseFrameBuffer:
     movhi pc,lr
 
     /* Write arguments to frame buffer info */
-    frameBufferInfoAddr .req r3
+    frameBufferInfoAddr .req r4
     ldr frameBufferInfoAddr,=FrameBufferInfo
     str width,[frameBufferInfoAddr,#0]
     str height,[frameBufferInfoAddr,#4]
