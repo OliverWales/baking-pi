@@ -39,12 +39,12 @@ main:
     lastX .req r8
     lastY .req r9
 
-    mov lastRandom #0
-    mov colour #0
-    mov lastX #0
-    mov lastY #0
+    mov lastRandom,#0
+    mov colour,#0
+    mov lastX,#0
+    mov lastY,#0
     
-    renderLoop:
+    renderLoop$:
         /* Generate random x and y */
         mov r0, lastRandom
         bl Random
@@ -63,7 +63,7 @@ main:
 
         /* Set colour */
         mov r0,colour
-        bl SetForeColour
+        bl SetForegroundColour
 
         /* Draw line */
         mov r0,lastX
