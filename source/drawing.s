@@ -108,23 +108,23 @@ DrawLine:
     sy .req r11
     er .req r12
 
-    /* If x1 > x0, set dx to x1 - x0 and sx to 1*/
+    /* If x1 > x0, set dx to x0 - x1 and sx to -1*/
     cmp x0,x1
-    subgt dx,x1,x0
-    movgt sx,#1
+    subgt dx,x0,x1
+    movgt sx,#-1
 
-    /* Else, set dx to x0 - x1 and sx to -1 */
-    suble dx,x0,x1
-    movle sx,#-1
+    /* Else, set dx to x1 - x0 and sx to 1 */
+    suble dx,x1,x0
+    movle sx,#1
 
-    /* If y1 > y0, set -dy to y0 - y1 and sy to 1*/
+    /* If y1 > y0, set -dy to y1 - y0 and sy to -1*/
     cmp y0,y1
-    subgt dy,y0,y1
-    movgt sy,#1
+    subgt dy,y1,y0
+    movgt sy,#-1
 
-    /* Else, set -dy to y0 - y1 and sy to -1 */
-    suble dy,y1,y0
-    movle sy,#-1
+    /* Else, set -dy to y0 - y1 and sy to 1 */
+    suble dy,y0,y1
+    movle sy,#1
 
     /* 	Set e to dx + (-dy) */
     add er,dx,dy
@@ -133,7 +133,7 @@ DrawLine:
     add y1,sy
 
     drawPixels:
-        /* If x0 = x1 or y0 = y1 return*/
+        /* If x0 = x1 or y0 = y1 return */
         teq x0,x1
         teqne y0,y1
         popeq {r4,r5,r6,r7,r8,r9,r10,r11,r12,pc}
@@ -143,14 +143,14 @@ DrawLine:
         mov r1,y0
         bl DrawPixel
 
-        /* If 2*error <= dx, y0 += sy, er += dx */
-        cmp dx,er,lsl #1
-        addle y0,sy
-        addle er,dx
-
         /* If 2*error >= -dy, x0 += sx, er += (-dy) */
         cmp dy,er,lsl #1
         addge x0,sx
         addge er,dy
+
+        /* If 2*error <= dx, y0 += sy, er += dx */
+        cmp dx,er,lsl #1
+        addle y0,sy
+        addle er,dx
 
         b drawPixels
