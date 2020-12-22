@@ -39,7 +39,7 @@ LOAD build/main.o
  .init          0x0000000000008000        0x4 build/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x2b8
+.text           0x0000000000008004      0x308
  *(.text)
  .text          0x0000000000008004       0x78 build/mailbox.o
                 0x0000000000008004                GetMailboxBase
@@ -50,25 +50,26 @@ LOAD build/main.o
  .text          0x00000000000080dc       0x40 build/systemTimer.o
                 0x00000000000080dc                GetSystemTimerAddress
                 0x00000000000080f4                Wait
- .text          0x000000000000811c       0x70 build/drawing.o
+ .text          0x000000000000811c       0xec build/drawing.o
                 0x000000000000811c                SetForegroundColour
                 0x0000000000008130                SetGraphicsAddress
                 0x000000000000813c                SetPixel
- .text          0x000000000000818c       0x98 build/gpio.o
-                0x000000000000818c                GetGpioBase
-                0x0000000000008194                SetGpioFunction
-                0x00000000000081e4                SetGpio
- .text          0x0000000000008224       0x98 build/main.o
+                0x0000000000008184                DrawLine
+ .text          0x0000000000008208       0x98 build/gpio.o
+                0x0000000000008208                GetGpioBase
+                0x0000000000008210                SetGpioFunction
+                0x0000000000008260                SetGpio
+ .text          0x00000000000082a0       0x6c build/main.o
 
-.data           0x00000000000082c0       0x30
+.data           0x0000000000008310       0x30
  *(.data)
- .data          0x00000000000082c0        0x0 build/mailbox.o
- .data          0x00000000000082c0       0x28 build/frameBuffer.o
-                0x00000000000082c0                FrameBufferInfo
- .data          0x00000000000082e8        0x0 build/systemTimer.o
- .data          0x00000000000082e8        0x8 build/drawing.o
- .data          0x00000000000082f0        0x0 build/gpio.o
- .data          0x00000000000082f0        0x0 build/main.o
+ .data          0x0000000000008310        0x0 build/mailbox.o
+ .data          0x0000000000008310       0x28 build/frameBuffer.o
+                0x0000000000008310                FrameBufferInfo
+ .data          0x0000000000008338        0x0 build/systemTimer.o
+ .data          0x0000000000008338        0x8 build/drawing.o
+ .data          0x0000000000008340        0x0 build/gpio.o
+ .data          0x0000000000008340        0x0 build/main.o
 
 /DISCARD/
  *(*)

@@ -141,7 +141,7 @@ DrawLine:
         /* Set pixel (x0, y0) */
         mov r0,x0
         mov r1,y0
-        bl setPixel
+        bl SetPixel
 
         /* If -dx <= 2*error, y0 += dy, er += dx */
         cmp dx,er,lsl #1
