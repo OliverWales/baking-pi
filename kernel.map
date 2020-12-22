@@ -53,7 +53,7 @@ LOAD build/main.o
  .text          0x000000000000811c       0xec build/drawing.o
                 0x000000000000811c                SetForegroundColour
                 0x0000000000008130                SetGraphicsAddress
-                0x000000000000813c                SetPixel
+                0x000000000000813c                DrawPixel
                 0x0000000000008184                DrawLine
  .text          0x0000000000008208       0x98 build/gpio.o
                 0x0000000000008208                GetGpioBase

@@ -111,7 +111,7 @@ Disassembly of section .text:
     8134:	e5810000 	str	r0, [r1]
     8138:	e1a0f00e 	mov	pc, lr
 
-0000813c <SetPixel>:
+0000813c <DrawPixel>:
     813c:	e59f20c0 	ldr	r2, [pc, #192]	; 8204 <drawPixels+0x38>
     8140:	e5922000 	ldr	r2, [r2]
     8144:	e5923004 	ldr	r3, [r2, #4]
@@ -157,13 +157,13 @@ Disassembly of section .text:
     81d4:	08bd9ff0 	popeq	{r4, r5, r6, r7, r8, r9, sl, fp, ip, pc}
     81d8:	e1a00004 	mov	r0, r4
     81dc:	e1a01005 	mov	r1, r5
-    81e0:	ebffffd5 	bl	813c <SetPixel>
+    81e0:	ebffffd5 	bl	813c <DrawPixel>
     81e4:	e158008c 	cmp	r8, ip, lsl #1
     81e8:	d085500b 	addle	r5, r5, fp
     81ec:	d08cc008 	addle	ip, ip, r8
     81f0:	e159008c 	cmp	r9, ip, lsl #1
-    81f4:	d084400a 	addle	r4, r4, sl
-    81f8:	d08cc009 	addle	ip, ip, r9
+    81f4:	a084400a 	addge	r4, r4, sl
+    81f8:	a08cc009 	addge	ip, ip, r9
     81fc:	eafffff2 	b	81cc <drawPixels>
     8200:	00008338 	.word	0x00008338
     8204:	0000833c 	.word	0x0000833c
