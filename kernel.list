@@ -138,15 +138,15 @@ Disassembly of section .text:
     8190:	e1a02006 	mov	r2, r6
     8194:	e1a03007 	mov	r3, r7
     8198:	e1540006 	cmp	r4, r6
-    819c:	c0468004 	subgt	r8, r6, r4
-    81a0:	c3a0a001 	movgt	sl, #1
-    81a4:	d0448006 	suble	r8, r4, r6
-    81a8:	d3e0a000 	mvnle	sl, #0
+    819c:	c0448006 	subgt	r8, r4, r6
+    81a0:	c3e0a000 	mvngt	sl, #0
+    81a4:	d0468004 	suble	r8, r6, r4
+    81a8:	d3a0a001 	movle	sl, #1
     81ac:	e1550007 	cmp	r5, r7
-    81b0:	c0459007 	subgt	r9, r5, r7
-    81b4:	c3a0b001 	movgt	fp, #1
-    81b8:	d0479005 	suble	r9, r7, r5
-    81bc:	d3e0b000 	mvnle	fp, #0
+    81b0:	c0479005 	subgt	r9, r7, r5
+    81b4:	c3e0b000 	mvngt	fp, #0
+    81b8:	d0459007 	suble	r9, r5, r7
+    81bc:	d3a0b001 	movle	fp, #1
     81c0:	e088c009 	add	ip, r8, r9
     81c4:	e086600a 	add	r6, r6, sl
     81c8:	e087700b 	add	r7, r7, fp
@@ -158,12 +158,12 @@ Disassembly of section .text:
     81d8:	e1a00004 	mov	r0, r4
     81dc:	e1a01005 	mov	r1, r5
     81e0:	ebffffd5 	bl	813c <DrawPixel>
-    81e4:	e158008c 	cmp	r8, ip, lsl #1
-    81e8:	d085500b 	addle	r5, r5, fp
-    81ec:	d08cc008 	addle	ip, ip, r8
-    81f0:	e159008c 	cmp	r9, ip, lsl #1
-    81f4:	a084400a 	addge	r4, r4, sl
-    81f8:	a08cc009 	addge	ip, ip, r9
+    81e4:	e159008c 	cmp	r9, ip, lsl #1
+    81e8:	a084400a 	addge	r4, r4, sl
+    81ec:	a08cc009 	addge	ip, ip, r9
+    81f0:	e158008c 	cmp	r8, ip, lsl #1
+    81f4:	d085500b 	addle	r5, r5, fp
+    81f8:	d08cc008 	addle	ip, ip, r8
     81fc:	eafffff2 	b	81cc <drawPixels>
     8200:	00008338 	.word	0x00008338
     8204:	0000833c 	.word	0x0000833c
