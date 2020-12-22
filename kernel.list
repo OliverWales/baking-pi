@@ -133,10 +133,10 @@ Disassembly of section .text:
 
 00008184 <DrawLine>:
     8184:	e92d5ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
-    8188:	e1a00004 	mov	r0, r4
-    818c:	e1a01005 	mov	r1, r5
-    8190:	e1a02006 	mov	r2, r6
-    8194:	e1a03007 	mov	r3, r7
+    8188:	e1a04000 	mov	r4, r0
+    818c:	e1a05001 	mov	r5, r1
+    8190:	e1a06002 	mov	r6, r2
+    8194:	e1a07003 	mov	r7, r3
     8198:	e1540006 	cmp	r4, r6
     819c:	c0448006 	subgt	r8, r4, r6
     81a0:	c3e0a000 	mvngt	sl, #0
