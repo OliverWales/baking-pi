@@ -246,17 +246,17 @@ Disassembly of section .text:
     82f8:	eb000010 	bl	8340 <Random>
     82fc:	e1a06000 	mov	r6, r0
     8300:	e1a04000 	mov	r4, r0
-    8304:	e1a02b25 	lsr	r2, r5, #22
-    8308:	e1a03b26 	lsr	r3, r6, #22
-    830c:	e3530c03 	cmp	r3, #768	; 0x300
-    8310:	2afffff5 	bcs	82ec <renderLoop$>
-    8314:	e1a00007 	mov	r0, r7
-    8318:	ebffff7f 	bl	811c <SetForegroundColour>
+    8304:	e1a00007 	mov	r0, r7
+    8308:	ebffff83 	bl	811c <SetForegroundColour>
+    830c:	e1a02b25 	lsr	r2, r5, #22
+    8310:	e1a03b26 	lsr	r3, r6, #22
+    8314:	e3530c03 	cmp	r3, #768	; 0x300
+    8318:	2afffff3 	bcs	82ec <renderLoop$>
     831c:	e1a00008 	mov	r0, r8
     8320:	e1a01009 	mov	r1, r9
-    8324:	ebffff96 	bl	8184 <DrawLine>
-    8328:	e1a08002 	mov	r8, r2
-    832c:	e1a09003 	mov	r9, r3
+    8324:	e1a08002 	mov	r8, r2
+    8328:	e1a09003 	mov	r9, r3
+    832c:	ebffff94 	bl	8184 <DrawLine>
     8330:	e2877001 	add	r7, r7, #1
     8334:	e1a07807 	lsl	r7, r7, #16
     8338:	e1a07827 	lsr	r7, r7, #16
