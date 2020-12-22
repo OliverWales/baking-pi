@@ -137,12 +137,12 @@ Disassembly of section .text:
     818c:	e1a01005 	mov	r1, r5
     8190:	e1a02006 	mov	r2, r6
     8194:	e1a03007 	mov	r3, r7
-    8198:	e1560004 	cmp	r6, r4
+    8198:	e1540006 	cmp	r4, r6
     819c:	c0468004 	subgt	r8, r6, r4
     81a0:	c3a0a001 	movgt	sl, #1
     81a4:	d0448006 	suble	r8, r4, r6
     81a8:	d3e0a000 	mvnle	sl, #0
-    81ac:	e1570005 	cmp	r7, r5
+    81ac:	e1550007 	cmp	r5, r7
     81b0:	c0459007 	subgt	r9, r5, r7
     81b4:	c3a0b001 	movgt	fp, #1
     81b8:	d0479005 	suble	r9, r7, r5
