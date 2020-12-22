@@ -39,7 +39,7 @@ LOAD build/main.o
  .init          0x0000000000008000        0x4 build/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x308
+.text           0x0000000000008004      0x338
  *(.text)
  .text          0x0000000000008004       0x78 build/mailbox.o
                 0x0000000000008004                GetMailboxBase
@@ -59,17 +59,17 @@ LOAD build/main.o
                 0x0000000000008208                GetGpioBase
                 0x0000000000008210                SetGpioFunction
                 0x0000000000008260                SetGpio
- .text          0x00000000000082a0       0x6c build/main.o
+ .text          0x00000000000082a0       0x9c build/main.o
 
-.data           0x0000000000008310       0x30
+.data           0x0000000000008340       0x30
  *(.data)
- .data          0x0000000000008310        0x0 build/mailbox.o
- .data          0x0000000000008310       0x28 build/frameBuffer.o
-                0x0000000000008310                FrameBufferInfo
- .data          0x0000000000008338        0x0 build/systemTimer.o
- .data          0x0000000000008338        0x8 build/drawing.o
- .data          0x0000000000008340        0x0 build/gpio.o
- .data          0x0000000000008340        0x0 build/main.o
+ .data          0x0000000000008340        0x0 build/mailbox.o
+ .data          0x0000000000008340       0x28 build/frameBuffer.o
+                0x0000000000008340                FrameBufferInfo
+ .data          0x0000000000008368        0x0 build/systemTimer.o
+ .data          0x0000000000008368        0x8 build/drawing.o
+ .data          0x0000000000008370        0x0 build/gpio.o
+ .data          0x0000000000008370        0x0 build/main.o
 
 /DISCARD/
  *(*)

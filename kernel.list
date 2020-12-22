@@ -73,7 +73,7 @@ Disassembly of section .text:
     80cc:	18bd8010 	popne	{r4, pc}
     80d0:	e1a00004 	mov	r0, r4
     80d4:	e8bd8010 	pop	{r4, pc}
-    80d8:	00008310 	.word	0x00008310
+    80d8:	00008340 	.word	0x00008340
 
 000080dc <GetSystemTimerAddress>:
     80dc:	e59f0034 	ldr	r0, [pc, #52]	; 8118 <loop$+0x14>
@@ -159,14 +159,14 @@ Disassembly of section .text:
     81dc:	e1a01005 	mov	r1, r5
     81e0:	ebffffd5 	bl	813c <DrawPixel>
     81e4:	e159008c 	cmp	r9, ip, lsl #1
-    81e8:	a084400a 	addge	r4, r4, sl
-    81ec:	a08cc009 	addge	ip, ip, r9
+    81e8:	a08cc009 	addge	ip, ip, r9
+    81ec:	a084400a 	addge	r4, r4, sl
     81f0:	e158008c 	cmp	r8, ip, lsl #1
-    81f4:	d085500b 	addle	r5, r5, fp
-    81f8:	d08cc008 	addle	ip, ip, r8
+    81f4:	d08cc008 	addle	ip, ip, r8
+    81f8:	d085500b 	addle	r5, r5, fp
     81fc:	eafffff2 	b	81cc <drawPixels>
-    8200:	00008338 	.word	0x00008338
-    8204:	0000833c 	.word	0x0000833c
+    8200:	00008368 	.word	0x00008368
+    8204:	0000836c 	.word	0x0000836c
 
 00008208 <GetGpioBase>:
     8208:	e59f008c 	ldr	r0, [pc, #140]	; 829c <SetGpio+0x3c>
@@ -235,16 +235,28 @@ Disassembly of section .text:
 000082d8 <noError$>:
     82d8:	e1a04000 	mov	r4, r0
     82dc:	ebffff93 	bl	8130 <SetGraphicsAddress>
-    82e0:	e3a00000 	mov	r0, #0
+    82e0:	e3a0000a 	mov	r0, #10
     82e4:	e3a01000 	mov	r1, #0
-    82e8:	e3a020c8 	mov	r2, #200	; 0xc8
-    82ec:	e3a03e19 	mov	r3, #400	; 0x190
-    82f0:	ebffffa3 	bl	8184 <DrawLine>
-    82f4:	e3a000c8 	mov	r0, #200	; 0xc8
-    82f8:	e3a01e19 	mov	r1, #400	; 0x190
-    82fc:	e3a020c8 	mov	r2, #200	; 0xc8
-    8300:	e3a03000 	mov	r3, #0
-    8304:	ebffff9e 	bl	8184 <DrawLine>
+    82e8:	ebffff93 	bl	813c <DrawPixel>
+    82ec:	e3a00014 	mov	r0, #20
+    82f0:	e3a01000 	mov	r1, #0
+    82f4:	ebffff90 	bl	813c <DrawPixel>
+    82f8:	e3a0000a 	mov	r0, #10
+    82fc:	e3a0100a 	mov	r1, #10
+    8300:	ebffff8d 	bl	813c <DrawPixel>
+    8304:	e3a00014 	mov	r0, #20
+    8308:	e3a0100a 	mov	r1, #10
+    830c:	ebffff8a 	bl	813c <DrawPixel>
+    8310:	e3a00000 	mov	r0, #0
+    8314:	e3a01000 	mov	r1, #0
+    8318:	e3a020c8 	mov	r2, #200	; 0xc8
+    831c:	e3a03e19 	mov	r3, #400	; 0x190
+    8320:	ebffff97 	bl	8184 <DrawLine>
+    8324:	e3a000c8 	mov	r0, #200	; 0xc8
+    8328:	e3a01e19 	mov	r1, #400	; 0x190
+    832c:	e3a020c8 	mov	r2, #200	; 0xc8
+    8330:	e3a03000 	mov	r3, #0
+    8334:	ebffff92 	bl	8184 <DrawLine>
 
-00008308 <loop$>:
-    8308:	eafffffe 	b	8308 <loop$>
+00008338 <loop$>:
+    8338:	eafffffe 	b	8338 <loop$>

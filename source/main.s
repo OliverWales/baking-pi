@@ -35,23 +35,23 @@ main:
 
     /* Test drawing some pixels */
     px .req r0
-    px .req r1
+    py .req r1
 
     mov px,#10
     mov py,#0
-    bl SetPixel
+    bl DrawPixel
 
     mov px,#20
     mov py,#0
-    bl SetPixel
+    bl DrawPixel
 
     mov px,#10
     mov py,#10
-    bl SetPixel
+    bl DrawPixel
 
     mov px,#20
     mov py,#10
-    bl SetPixel
+    bl DrawPixel
 
     .unreq px
     .unreq py
