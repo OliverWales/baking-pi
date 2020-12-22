@@ -145,12 +145,22 @@ DrawLine:
 
         /* If 2*error >= -dy, x0 += sx, er += (-dy) */
         cmp dy,er,lsl #1
-        addge x0,sx
         addge er,dy
+        addge x0,sx
 
         /* If 2*error <= dx, y0 += sy, er += dx */
         cmp dx,er,lsl #1
-        addle y0,sy
         addle er,dx
+        addle y0,sy
 
         b drawPixels
+
+	.unreq x0
+	.unreq x1
+	.unreq y0
+	.unreq y1
+	.unreq dx
+	.unreq dy
+	.unreq sx
+	.unreq sy
+	.unreq er

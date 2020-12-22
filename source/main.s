@@ -33,6 +33,29 @@ main:
     mov frameBufferInfoAddr,r0
     bl SetGraphicsAddress
 
+    /* Test drawing some pixels */
+    px .req r0
+    px .req r1
+
+    mov px,#10
+    mov py,#0
+    bl SetPixel
+
+    mov px,#20
+    mov py,#0
+    bl SetPixel
+
+    mov px,#10
+    mov py,#10
+    bl SetPixel
+
+    mov px,#20
+    mov py,#10
+    bl SetPixel
+
+    .unreq px
+    .unreq py
+
     /* Test drawing some lines */
     x0 .req r0
     y0 .req r1
@@ -54,3 +77,8 @@ main:
     /* Loop forever */
     loop$:
         b loop$
+
+    .unreq x0
+    .unreq y0
+    .unreq x1
+    .unreq y1
