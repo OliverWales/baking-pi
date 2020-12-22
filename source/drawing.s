@@ -144,15 +144,15 @@ DrawLine:
         mov r1,y0
         bl DrawPixel
 
-        /* If 2*error >= -dy, x0 += sx, er += (-dy) */
+        /* If 2*error <= -dy, er += (-dy), x0 += sx */
         cmp dy,er,lsl #1
-        addge er,dy
-        addge x0,sx
+        addle er,dy
+        addle x0,sx
 
-        /* If 2*error <= dx, y0 += sy, er += dx */
+        /* If 2*error >= dx, er += dx, y0 += sy */
         cmp dx,er,lsl #1
-        addle er,dx
-        addle y0,sy
+        addge er,dx
+        addge y0,sy
 
         b drawPixels
 
