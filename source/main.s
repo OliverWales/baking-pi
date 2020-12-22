@@ -45,7 +45,7 @@ main:
     mov lastY,#0
     
     renderLoop$:
-        /* Generate random x and y */
+        /* Generate random position */
         mov r0, lastRandom
         bl Random
         mov x,r0
@@ -53,27 +53,29 @@ main:
         mov y,r0
         mov lastRandom,r0
 
-        /* Shift into range 0-1023 */
+        /* Set colour */
+        mov r0,colour
+        bl SetForegroundColour
+
+        /* Shift new position into range 0-1023 */
         lsr r2,x,#22
-	    lsr r3,y,#22
+        lsr r3,y,#22
 
         /* Re-select if out of y range */
         cmp r3,#768
 	    bhs renderLoop$
 
-        /* Set colour */
-        mov r0,colour
-        bl SetForegroundColour
-
-        /* Draw line */
+        /* Load last position */
         mov r0,lastX
-        mov r1,lastY
-        bl DrawLine
+	    mov r1,lastY
 
         /* Update last position */
         mov lastX,r2
 	    mov lastY,r3
 
+        /* Draw line */
+        bl DrawLine
+        
         /* Update colour */
         add colour,#1
         lsl colour,#16
