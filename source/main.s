@@ -32,6 +32,7 @@ main:
     frameBufferInfoAddr .req r4
     mov frameBufferInfoAddr,r0
     bl SetGraphicsAddress
+    .unreq frameBufferInfoAddr
 
     /* Test drawing some pixels */
     px .req r0

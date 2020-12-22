@@ -41,6 +41,7 @@ SetGraphicsAddress:
 DrawPixel:
     px .req r0
     py .req r1
+
     addr .req r2
     ldr addr,=graphicsAddress
     ldr addr,[addr]
@@ -97,10 +98,10 @@ DrawLine:
     x1 .req r6
     y1 .req r7
 
-    mov r0,x0
-    mov r1,y0
-    mov r2,x1
-    mov r3,y1
+    mov x0,r0
+    mov y0,r1
+    mov x1,r2
+    mov y1,r3
 
     dx .req r8
     dy .req r9
