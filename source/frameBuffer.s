@@ -1,4 +1,7 @@
 .section .data
+/*
+* Template request to the graphics processor for a frame buffer
+*/
 .align 4
 .globl FrameBufferInfo
 FrameBufferInfo:
@@ -14,6 +17,9 @@ FrameBufferInfo:
     .int 0      /* #36 GPU - Size of frame buffer */
 
 .section .text
+/*
+* Initialise a frame buffer of the given width, height and colour depth
+*/
 .globl InitialiseFrameBuffer
 InitialiseFrameBuffer:
     /* Check that arguements are in range */
@@ -45,7 +51,7 @@ InitialiseFrameBuffer:
     mov r0,frameBufferInfoAddr
     add r0,#0x40000000 /* add 0x40000000 to instruct GPU to flush cache */
     mov r1,#1
-    push {lr}
+    push {r4,lr}
     bl MailboxWrite
 
     /* Read channel 1 */
@@ -55,10 +61,10 @@ InitialiseFrameBuffer:
     /* Return 0 if did not succeed */
     teq result,#0
     movne result,#0
-    popne {pc}
+    popne {r4,pc}
 
     /* Return the frame buffer info address*/
     mov result,frameBufferInfoAddr
-    pop {pc}
+    pop {r4,pc}
     .unreq result
     .unreq frameBufferInfoAddr

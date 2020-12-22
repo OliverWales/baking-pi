@@ -27,49 +27,65 @@ main:
     error$:
         b error$
 
-    /* Move frame buffer info address in r4 */
+    /* Set graphics address */
     noError$:
-    frameBufferInfoAddr .req r4
-    mov frameBufferInfoAddr,r0
+    bl SetGraphicsAddress
 
-    render$:
-        /* Get address of frame buffer */
-        frameBufferAddr .req r3
-        ldr frameBufferAddr,[frameBufferInfoAddr,#32]
+    /* Pi-casso */
+    lastRandom .req r4
+    x .req r5
+    y .req r6
+    colour .req r7
+    lastX .req r8
+    lastY .req r9
 
-        colour .req r0
-        y .req r1
-        mov y,#768
+    mov lastRandom,#0
+    mov colour,#0
+    mov lastX,#0
+    mov lastY,#0
+    
+    renderLoop$:
+        /* Generate random position */
+        mov r0, lastRandom
+        bl Random
+        mov x,r0
+        bl Random
+        mov y,r0
+        mov lastRandom,r0
 
-        /* Loop over rows */
-        drawRow$:
-            x .req r2
-            mov x,#1024
+        /* Set colour */
+        mov r0,colour
+        bl SetForegroundColour
 
-            /* Loop over columns */
-            drawPixel$:
-                /* Write pixel */
-                strh colour,[frameBufferAddr]
+        /* Shift new position into range 0-1023 */
+        lsr r2,x,#22
+        lsr r3,y,#22
 
-                /* Increment frame buffer address */
-                add frameBufferAddr,#2
+        /* Re-select if out of y range */
+        cmp r3,#768
+	    bhs renderLoop$
 
-                /* Decrement x */
-                sub x,#1
-                teq x,#0
-                bne drawPixel$
+        /* Load last position */
+        mov r0,lastX
+	    mov r1,lastY
 
-            /* Decrement y */
-            sub y,#1
+        /* Update last position */
+        mov lastX,r2
+	    mov lastY,r3
 
-            /* Increment colour */
-            add colour,#1
-            teq y,#0
-            bne drawRow$
+        /* Draw line */
+        bl DrawLine
+        
+        /* Update colour */
+        add colour,#1
+        lsl colour,#16
+        lsr colour,#16
 
-        /* Loop forever */
-        b render$
+        b renderLoop$
 
-        .unreq frameBufferAddr
-        .unreq frameBufferInfoAddr
-
+        .unreq lastRandom
+        .unreq lastX
+        .unreq lastY
+        .unreq x
+        .unreq y
+        .unreq colour
