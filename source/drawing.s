@@ -83,3 +83,74 @@ SetPixel:
     .unreq fore
     .unreq addr
     mov pc,lr
+
+/*
+* Draw a line from (x0,y0) to (x1,y1) (R0, R1, R2, R3)
+*/
+.globl DrawLine
+DrawLine:
+    /* Push old register values to stack */
+    push {r4,r5,r6,r7,r8,r9,r10,r11,r12,lr}
+
+    x0 .req r4
+    y0 .req r5
+    x1 .req r6
+    y1 .req r7
+
+    mov r0,x0
+    mov r1,y0
+    mov r2,x1
+    mov r3,y1
+
+    dx .req r8
+    dy .req r9
+    sx .req r10
+    sy .req r11
+    er .req r12
+
+    /* If x1 > x0, set dx to x1 - x0 and sx to 1*/
+    cmp x1,x0
+    subgt dx,x1,x0
+    movgt sx,#1
+
+    /* Else, set dx to x0 - x1 and sx to -1 */
+    suble dx,x0,x1
+    movle sx,#-1
+
+    /* If y1 > y0, set -dy to y0 - y1 and sy to 1*/
+    cmp y1,y0
+    subgt dy,y0,y1
+    movgt sy,#1
+
+    /* Else, set -dy to y0 - y1 and sy to -1 */
+    suble dy,y1,y0
+    movle sy,#-1
+
+    /* 	Set e to dx + (-dy) */
+    add er,dx,dy
+
+    add x1,sx
+    add y1,sy
+
+    drawPixels:
+        /* If x0 = x1 or y0 = y1 return*/
+        teq x0,x1
+        teqne y0,y1
+        popeq {r4,r5,r6,r7,r8,r9,r10,r11,r12,pc}
+
+        /* Set pixel (x0, y0) */
+        mov r0,x0
+        mov r1,y0
+        bl setPixel
+
+        /* If -dx <= 2*error, y0 += dy, er += dx */
+        cmp dx,er,lsl #1
+        addle y0,sy
+        addle er,dx
+
+        /* If -dy <= 2*error, x0 += dx, er += (-dy) */
+        cmp dy,er,lsl #1
+        addle x0,sx
+        addle er,dy
+
+        b drawPixels
