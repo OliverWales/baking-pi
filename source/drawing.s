@@ -85,7 +85,7 @@ DrawPixel:
     mov pc,lr
 
 /*
-* Draw a line from (x0,y0) to (x1,y1) (R0, R1, R2, R3)
+* Draw a line from (x0,y0) to (x1,y1)
 */
 .globl DrawLine
 DrawLine:
@@ -109,7 +109,7 @@ DrawLine:
     er .req r12
 
     /* If x1 > x0, set dx to x1 - x0 and sx to 1*/
-    cmp x1,x0
+    cmp x0,x1
     subgt dx,x1,x0
     movgt sx,#1
 
@@ -118,7 +118,7 @@ DrawLine:
     movle sx,#-1
 
     /* If y1 > y0, set -dy to y0 - y1 and sy to 1*/
-    cmp y1,y0
+    cmp y0,y1
     subgt dy,y0,y1
     movgt sy,#1
 
