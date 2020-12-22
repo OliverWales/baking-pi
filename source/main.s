@@ -29,57 +29,61 @@ main:
 
     /* Set graphics address */
     noError$:
-    frameBufferInfoAddr .req r4
-    mov frameBufferInfoAddr,r0
     bl SetGraphicsAddress
-    .unreq frameBufferInfoAddr
 
-    /* Test drawing some pixels */
-    px .req r0
-    py .req r1
+    /* Pi-casso */
+    lastRandom .req r4
+    x .req r5
+    y .req r6
+    colour .req r7
+    lastX .req r8
+    lastY .req r9
 
-    mov px,#10
-    mov py,#0
-    bl DrawPixel
+    mov lastRandom #0
+    mov colour #0
+    mov lastX #0
+    mov lastY #0
+    
+    renderLoop:
+        /* Generate random x and y */
+        mov r0, lastRandom
+        bl Random
+        mov x,r0
+        bl Random
+        mov y,r0
+        mov lastRandom,r0
 
-    mov px,#20
-    mov py,#0
-    bl DrawPixel
+        /* Shift into range 0-1023 */
+        lsr r2,x,#22
+	    lsr r3,y,#22
 
-    mov px,#10
-    mov py,#10
-    bl DrawPixel
+        /* Re-select if out of y range */
+        cmp r3,#768
+	    bhs renderLoop$
 
-    mov px,#20
-    mov py,#10
-    bl DrawPixel
+        /* Set colour */
+        mov r0,colour
+        bl SetForeColour
 
-    .unreq px
-    .unreq py
+        /* Draw line */
+        mov r0,lastX
+        mov r1,lastY
+        bl DrawLine
 
-    /* Test drawing some lines */
-    x0 .req r0
-    y0 .req r1
-    x1 .req r2
-    y1 .req r3
+        /* Update last position */
+        mov lastX,r2
+	    mov lastY,r3
 
-    mov x0,#0
-    mov y0,#0
-    mov x1,#200
-    mov y1,#400
-    bl DrawLine
+        /* Update colour */
+        add colour,#1
+        lsl colour,#16
+        lsr colour,#16
 
-    mov x0,#200
-    mov y0,#400
-    mov x1,#200
-    mov y1,#0
-    bl DrawLine
+        b renderLoop$
 
-    /* Loop forever */
-    loop$:
-        b loop$
-
-    .unreq x0
-    .unreq y0
-    .unreq x1
-    .unreq y1
+        .unreq lastRandom
+        .unreq lastX
+        .unreq lastY
+        .unreq x
+        .unreq y
+        .unreq colour
