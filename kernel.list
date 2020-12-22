@@ -159,11 +159,11 @@ Disassembly of section .text:
     81dc:	e1a01005 	mov	r1, r5
     81e0:	ebffffd5 	bl	813c <DrawPixel>
     81e4:	e159008c 	cmp	r9, ip, lsl #1
-    81e8:	a08cc009 	addge	ip, ip, r9
-    81ec:	a084400a 	addge	r4, r4, sl
+    81e8:	d08cc009 	addle	ip, ip, r9
+    81ec:	d084400a 	addle	r4, r4, sl
     81f0:	e158008c 	cmp	r8, ip, lsl #1
-    81f4:	d08cc008 	addle	ip, ip, r8
-    81f8:	d085500b 	addle	r5, r5, fp
+    81f4:	a08cc008 	addge	ip, ip, r8
+    81f8:	a085500b 	addge	r5, r5, fp
     81fc:	eafffff2 	b	81cc <drawPixels>
     8200:	00008368 	.word	0x00008368
     8204:	0000836c 	.word	0x0000836c
