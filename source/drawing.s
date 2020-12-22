@@ -37,8 +37,8 @@ SetGraphicsAddress:
 /*
 * Set pixel at given (px, py) in current framebuffer to current foreground colour
 */
-.globl SetPixel
-SetPixel:
+.globl DrawPixel
+DrawPixel:
     px .req r0
     py .req r1
     addr .req r2
@@ -141,16 +141,16 @@ DrawLine:
         /* Set pixel (x0, y0) */
         mov r0,x0
         mov r1,y0
-        bl SetPixel
+        bl DrawPixel
 
-        /* If -dx <= 2*error, y0 += dy, er += dx */
+        /* If 2*error <= dx, y0 += sy, er += dx */
         cmp dx,er,lsl #1
         addle y0,sy
         addle er,dx
 
-        /* If -dy <= 2*error, x0 += dx, er += (-dy) */
+        /* If 2*error >= -dy, x0 += sx, er += (-dy) */
         cmp dy,er,lsl #1
-        addle x0,sx
-        addle er,dy
+        addge x0,sx
+        addge er,dy
 
         b drawPixels
