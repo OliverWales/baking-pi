@@ -277,19 +277,19 @@ DrawString:
 
         /* Handle null terminator */
         teq char,#'\0'
-        beq stringLoopEnd
+        beq stringLoopEnd$
 
         /* Handle line feed */
         teq char,#'\n'
         moveq x,x0
         addeq y,#8
         addeq height,#8
-        beq stringLoop
+        beq stringLoop$
 
         /* Handle tab */
         teq char,#'\t'
         addeq width,#32
-        beq stringLoop
+        beq stringLoop$
 
         /* Draw character */
         mov r1,x
