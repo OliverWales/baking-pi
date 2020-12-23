@@ -32,61 +32,87 @@ main:
     bl SetGraphicsAddress
 
     /* Print "Hello, World!" */
-    c .req r0
-    x .req r1
-    y .req r2
+    x .req r4
+    y .req r5
 
     mov x,#0
     mov y,#0
-    mov c,#'H'
-    bl DrawCharacter
 
-    add x,r0
-    mov c,#'e'
+    mov r0,#'H'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'l'
+    
+    mov r0,#'e'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'l'
+
+    mov r0,#'l'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'o'
+
+    mov r0,#'l'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#','
+
+    mov r0,#'o'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#' '
+
+    mov r0,#','
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'W'
+
+    mov r0,#' '
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'o'
+
+    mov r0,#'W'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'r'
+
+    mov r0,#'o'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'l'
+
+    mov r0,#'r'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'d'
+
+    mov r0,#'l'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
-
     add x,r0
-    mov c,#'!'
+
+    mov r0,#'d'
+    mov r1,x
+    mov r2,y
+    bl DrawCharacter
+    add x,r0
+
+    mov r0,#'!'
+    mov r1,x
+    mov r2,y
     bl DrawCharacter
 
     /* Loop forever */
