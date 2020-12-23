@@ -43,7 +43,7 @@ LOAD build/random.o
  .init          0x0000000000008000        0x4 build/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x3e0
+.text           0x0000000000008004      0x3e8
  *(.text)
  .text          0x0000000000008004       0x78 build/mailbox.o
                 0x0000000000008004                GetMailboxBase
@@ -65,9 +65,9 @@ LOAD build/random.o
                 0x00000000000082e8                GetGpioBase
                 0x00000000000082f0                SetGpioFunction
                 0x0000000000008340                SetGpio
- .text          0x0000000000008380       0x4c build/main.o
- .text          0x00000000000083cc       0x18 build/random.o
-                0x00000000000083cc                Random
+ .text          0x0000000000008380       0x54 build/main.o
+ .text          0x00000000000083d4       0x18 build/random.o
+                0x00000000000083d4                Random
 
 .data           0x00000000000083f0      0x84e
  *(.data)

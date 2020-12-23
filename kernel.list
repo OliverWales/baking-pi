@@ -304,17 +304,19 @@ Disassembly of section .text:
 
 000083b8 <noError$>:
     83b8:	ebffff5c 	bl	8130 <SetGraphicsAddress>
-    83bc:	e59f0004 	ldr	r0, [pc, #4]	; 83c8 <loop$+0x4>
-    83c0:	ebffffa9 	bl	826c <DrawString>
+    83bc:	e59f000c 	ldr	r0, [pc, #12]	; 83d0 <loop$+0x4>
+    83c0:	e3a01000 	mov	r1, #0
+    83c4:	e3a02000 	mov	r2, #0
+    83c8:	ebffffa7 	bl	826c <DrawString>
 
-000083c4 <loop$>:
-    83c4:	eafffffe 	b	83c4 <loop$>
-    83c8:	00008c30 	.word	0x00008c30
+000083cc <loop$>:
+    83cc:	eafffffe 	b	83cc <loop$>
+    83d0:	00008c30 	.word	0x00008c30
 
-000083cc <Random>:
-    83cc:	e3a01cef 	mov	r1, #61184	; 0xef00
-    83d0:	e0010190 	mul	r1, r0, r1
-    83d4:	e0010190 	mul	r1, r0, r1
-    83d8:	e0811000 	add	r1, r1, r0
-    83dc:	e2810049 	add	r0, r1, #73	; 0x49
-    83e0:	e1a0f00e 	mov	pc, lr
+000083d4 <Random>:
+    83d4:	e3a01cef 	mov	r1, #61184	; 0xef00
+    83d8:	e0010190 	mul	r1, r0, r1
+    83dc:	e0010190 	mul	r1, r0, r1
+    83e0:	e0811000 	add	r1, r1, r0
+    83e4:	e2810049 	add	r0, r1, #73	; 0x49
+    83e8:	e1a0f00e 	mov	pc, lr

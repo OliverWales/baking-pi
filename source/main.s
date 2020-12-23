@@ -38,6 +38,8 @@ main:
 
     /* Print "Hello, World!" */
     ldr r0,=hello
+    mov r1,#0
+    mov r2,#0
     bl DrawString
 
     /* Loop forever */
