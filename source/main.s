@@ -3,6 +3,11 @@
 _start:
     b main
 
+.section .data
+.align 1
+hello:
+    .string "Hello, World!" /* .string adds null */
+
 .section .text
 main:
     mov sp,#0x8000
@@ -32,88 +37,8 @@ main:
     bl SetGraphicsAddress
 
     /* Print "Hello, World!" */
-    x .req r4
-    y .req r5
-
-    mov x,#0
-    mov y,#0
-
-    mov r0,#'H'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-    
-    mov r0,#'e'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'l'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'l'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'o'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#','
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#' '
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'W'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'o'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'r'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'l'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'d'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
-    add x,r0
-
-    mov r0,#'!'
-    mov r1,x
-    mov r2,y
-    bl DrawCharacter
+    ldr r0,=hello
+    bl DrawString
 
     /* Loop forever */
     loop$:
