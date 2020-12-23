@@ -272,7 +272,7 @@ DrawString:
         add charAddr,#1
 
         /* Handle null terminator */
-        teq char,#'\0'
+        teq char,#0
         beq stringLoopEnd$
 
         /* Handle line feed */

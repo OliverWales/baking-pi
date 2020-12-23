@@ -3,10 +3,6 @@
 _start:
     b main
 
-.section .data
-hello:
-    .asciz "TAB TEST\n========\n|...|...|...|...|...|\n1\t2\t3\t4\t5\t6\n\t2\t\t4\t\t6\n1\t11\t111\t1111\t1" /* .asciz adds null */
-
 .section .text
 main:
     mov sp,#0x8000
@@ -35,12 +31,17 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Print "Hello, World!" at (0, 0) */
-    ldr r0,=hello
+    /* Load command line tag */
+    mov r0,#9
+    bl FindTag
+
+    /* Skip length */
+    add r0,#8
+
+    /* Print at (0, 0) */
     mov r1,#0
     mov r2,#0
     bl DrawString
 
-    /* Loop forever */
     loop$:
         b loop$
