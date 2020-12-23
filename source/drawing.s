@@ -5,13 +5,18 @@
 */
 foregroundColour:
     .hword 0xFFFF
-
 .align 2
 /*
 * Current framebuffer info address
 */
 graphicsAddress:
     .int 0
+/*
+* Font
+*/
+.align 4
+font:
+    .incbin "font.bin"
 
 .section .text
 /*
@@ -133,7 +138,7 @@ DrawLine:
     add x1,sx
     add y1,sy
 
-    drawPixels:
+    drawPixels$:
         /* If x0 = x1 or y0 = y1 return */
         teq x0,x1
         teqne y0,y1
@@ -154,7 +159,7 @@ DrawLine:
         addge er,dx
         addge y0,sy
 
-        b drawPixels
+        b drawPixels$
 
 	.unreq x0
 	.unreq x1
@@ -165,3 +170,80 @@ DrawLine:
 	.unreq sx
 	.unreq sy
 	.unreq er
+
+/*
+* Draw character in r0 at position (r1, r2), return width and height drawn
+*/
+.globl DrawCharacter
+DrawCharacter:
+    /* Validate character */
+    cmp r0,#127
+    movhi r0,#0
+    movhi r1,#0
+    movhi pc,lr
+
+    push {r4,r5,r6,r7,r8,lr}
+    x .req r4
+    y .req r5
+    charAddr .req r6
+    
+    /* Copy position */
+    mov x,r1
+    mov y,r2
+
+    /* Set char address to font + character << 4 */
+    ldr charAddr,=font
+    add charAddr, r0,lsl #4
+
+    /* Loop over rows */
+    rowLoop$:
+        /* Get next byte of character */
+        mask .req r7
+        ldrb mask,[charAddr]
+
+        /* Highest bit is leftmost pixel */
+        col .req r8
+        mov col,#8
+
+        /* While col > 0 */
+        columnLoop$:
+            /* Decrement col */
+            subs col,#1
+            blt columnLoopEnd$
+
+            /* Check mask */
+            lsl mask,#1
+            tst mask,#0x100
+
+            /* If 0, continue */
+            beq columnLoop$
+
+            /* Else, draw pixel */
+            add r0,x,col
+            mov r1,y
+            bl DrawPixel
+
+            b columnLoop$
+
+        columnLoopEnd$:
+        .unreq col
+        .unreq mask
+        
+        /* Increment y position */
+        add y,#1
+
+        /* Increment char address  */
+        add charAddr,#1
+
+        /* Check if more rows to draw */
+        tst charAddr,#0b1111
+        bne rowLoop$
+
+    .unreq charAddr
+    .unreq x
+    .unreq y
+
+    /* Return pixels drawn */
+    mov r0,#8
+    mov r1,#16
+    pop {r4,r5,r6,r7,r8,pc}
