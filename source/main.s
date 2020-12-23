@@ -31,61 +31,18 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Pi-casso */
-    lastRandom .req r4
-    x .req r5
-    y .req r6
-    colour .req r7
-    lastX .req r8
-    lastY .req r9
+    /* Load command line tag */
+    mov r0,#9
+    bl FindTag
 
-    mov lastRandom,#0
-    mov colour,#0
-    mov lastX,#0
-    mov lastY,#0
-    
-    renderLoop$:
-        /* Generate random position */
-        mov r0, lastRandom
-        bl Random
-        mov x,r0
-        bl Random
-        mov y,r0
-        mov lastRandom,r0
+    /* Skip length */
+    add r0,#8
 
-        /* Set colour */
-        mov r0,colour
-        bl SetForegroundColour
+    /* Print at (0, 0) */
+    mov r1,#0
+    mov r2,#0
+    bl DrawString
 
-        /* Shift new position into range 0-1023 */
-        lsr r2,x,#22
-        lsr r3,y,#22
+    loop$:
+        b loop$
 
-        /* Re-select if out of y range */
-        cmp r3,#768
-	    bhs renderLoop$
-
-        /* Load last position */
-        mov r0,lastX
-	    mov r1,lastY
-
-        /* Update last position */
-        mov lastX,r2
-	    mov lastY,r3
-
-        /* Draw line */
-        bl DrawLine
-        
-        /* Update colour */
-        add colour,#1
-        lsl colour,#16
-        lsr colour,#16
-
-        b renderLoop$
-
-        .unreq lastRandom
-        .unreq lastX
-        .unreq lastY
-        .unreq x
-        .unreq y
-        .unreq colour
