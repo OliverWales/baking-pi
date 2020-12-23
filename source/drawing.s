@@ -276,7 +276,7 @@ DrawString:
         add charAddr,#1
 
         /* Handle null terminator */
-        teq char,#0
+        teq char,#'\0'
         beq stringLoopEnd$
 
         /* Handle line feed */
@@ -288,7 +288,10 @@ DrawString:
 
         /* Handle tab */
         teq char,#'\t'
-        addeq width,#32
+        lsreq width,#5 /* Divide by 32 (truncated) */
+        addeq width,#1 /* Add 1 */
+        lsleq width,#5 /* Multiply by 32 */
+        addeq x,x0,width /* Update x position */
         beq stringLoop$
 
         /* Draw character */
