@@ -218,7 +218,7 @@ Disassembly of section .text:
     8298:	02877010 	addeq	r7, r7, #16
     829c:	0afffff7 	beq	8280 <stringLoop$>
     82a0:	e3300009 	teq	r0, #9
-    82a4:	e0460005 	sub	r0, r6, r5
+    82a4:	00460005 	subeq	r0, r6, r5
     82a8:	01a002a0 	lsreq	r0, r0, #5
     82ac:	02800001 	addeq	r0, r0, #1
     82b0:	01a00280 	lsleq	r0, r0, #5

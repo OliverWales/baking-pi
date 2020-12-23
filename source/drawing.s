@@ -284,7 +284,7 @@ DrawString:
         /* Handle tab */
         teq char,#'\t'
         tabs .req r0
-        sub tabs,x,x0   /* Get relative x position */
+        subeq tabs,x,x0	/* Get relative x position */
         lsreq tabs,#5   /* Divide by 32 (truncated) */
         addeq tabs,#1   /* Add 1 */
         lsleq tabs,#5   /* Multiply by 32 */
