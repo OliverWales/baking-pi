@@ -73,7 +73,7 @@ Disassembly of section .text:
     80cc:	18bd8010 	popne	{r4, pc}
     80d0:	e1a00004 	mov	r0, r4
     80d4:	e8bd8010 	pop	{r4, pc}
-    80d8:	00008410 	.word	0x00008410
+    80d8:	00008470 	.word	0x00008470
 
 000080dc <GetSystemTimerAddress>:
     80dc:	e59f0034 	ldr	r0, [pc, #52]	; 8118 <loop$+0x14>
@@ -200,9 +200,9 @@ Disassembly of section .text:
     8260:	e3a00008 	mov	r0, #8
     8264:	e3a01010 	mov	r1, #16
     8268:	e8bd81f0 	pop	{r4, r5, r6, r7, r8, pc}
-    826c:	00008440 	.word	0x00008440
-    8270:	00008444 	.word	0x00008444
-    8274:	00008450 	.word	0x00008450
+    826c:	000084a0 	.word	0x000084a0
+    8270:	000084a4 	.word	0x000084a4
+    8274:	000084b0 	.word	0x000084b0
 
 00008278 <GetGpioBase>:
     8278:	e59f008c 	ldr	r0, [pc, #140]	; 830c <SetGpio+0x3c>
@@ -270,54 +270,80 @@ Disassembly of section .text:
 
 00008348 <noError$>:
     8348:	ebffff78 	bl	8130 <SetGraphicsAddress>
-    834c:	e3a01000 	mov	r1, #0
-    8350:	e3a02000 	mov	r2, #0
+    834c:	e3a04000 	mov	r4, #0
+    8350:	e3a05000 	mov	r5, #0
     8354:	e3a00048 	mov	r0, #72	; 0x48
-    8358:	ebffffa8 	bl	8200 <DrawCharacter>
-    835c:	e0811000 	add	r1, r1, r0
-    8360:	e3a00065 	mov	r0, #101	; 0x65
-    8364:	ebffffa5 	bl	8200 <DrawCharacter>
-    8368:	e0811000 	add	r1, r1, r0
-    836c:	e3a0006c 	mov	r0, #108	; 0x6c
-    8370:	ebffffa2 	bl	8200 <DrawCharacter>
-    8374:	e0811000 	add	r1, r1, r0
-    8378:	e3a0006c 	mov	r0, #108	; 0x6c
-    837c:	ebffff9f 	bl	8200 <DrawCharacter>
-    8380:	e0811000 	add	r1, r1, r0
-    8384:	e3a0006f 	mov	r0, #111	; 0x6f
+    8358:	e1a01004 	mov	r1, r4
+    835c:	e1a02005 	mov	r2, r5
+    8360:	ebffffa6 	bl	8200 <DrawCharacter>
+    8364:	e0844000 	add	r4, r4, r0
+    8368:	e3a00065 	mov	r0, #101	; 0x65
+    836c:	e1a01004 	mov	r1, r4
+    8370:	e1a02005 	mov	r2, r5
+    8374:	ebffffa1 	bl	8200 <DrawCharacter>
+    8378:	e0844000 	add	r4, r4, r0
+    837c:	e3a0006c 	mov	r0, #108	; 0x6c
+    8380:	e1a01004 	mov	r1, r4
+    8384:	e1a02005 	mov	r2, r5
     8388:	ebffff9c 	bl	8200 <DrawCharacter>
-    838c:	e0811000 	add	r1, r1, r0
-    8390:	e3a0002c 	mov	r0, #44	; 0x2c
-    8394:	ebffff99 	bl	8200 <DrawCharacter>
-    8398:	e0811000 	add	r1, r1, r0
-    839c:	e3a00020 	mov	r0, #32
-    83a0:	ebffff96 	bl	8200 <DrawCharacter>
-    83a4:	e0811000 	add	r1, r1, r0
-    83a8:	e3a00057 	mov	r0, #87	; 0x57
-    83ac:	ebffff93 	bl	8200 <DrawCharacter>
-    83b0:	e0811000 	add	r1, r1, r0
-    83b4:	e3a0006f 	mov	r0, #111	; 0x6f
-    83b8:	ebffff90 	bl	8200 <DrawCharacter>
-    83bc:	e0811000 	add	r1, r1, r0
-    83c0:	e3a00072 	mov	r0, #114	; 0x72
+    838c:	e0844000 	add	r4, r4, r0
+    8390:	e3a0006c 	mov	r0, #108	; 0x6c
+    8394:	e1a01004 	mov	r1, r4
+    8398:	e1a02005 	mov	r2, r5
+    839c:	ebffff97 	bl	8200 <DrawCharacter>
+    83a0:	e0844000 	add	r4, r4, r0
+    83a4:	e3a0006f 	mov	r0, #111	; 0x6f
+    83a8:	e1a01004 	mov	r1, r4
+    83ac:	e1a02005 	mov	r2, r5
+    83b0:	ebffff92 	bl	8200 <DrawCharacter>
+    83b4:	e0844000 	add	r4, r4, r0
+    83b8:	e3a0002c 	mov	r0, #44	; 0x2c
+    83bc:	e1a01004 	mov	r1, r4
+    83c0:	e1a02005 	mov	r2, r5
     83c4:	ebffff8d 	bl	8200 <DrawCharacter>
-    83c8:	e0811000 	add	r1, r1, r0
-    83cc:	e3a0006c 	mov	r0, #108	; 0x6c
-    83d0:	ebffff8a 	bl	8200 <DrawCharacter>
-    83d4:	e0811000 	add	r1, r1, r0
-    83d8:	e3a00064 	mov	r0, #100	; 0x64
-    83dc:	ebffff87 	bl	8200 <DrawCharacter>
-    83e0:	e0811000 	add	r1, r1, r0
-    83e4:	e3a00021 	mov	r0, #33	; 0x21
-    83e8:	ebffff84 	bl	8200 <DrawCharacter>
+    83c8:	e0844000 	add	r4, r4, r0
+    83cc:	e3a00020 	mov	r0, #32
+    83d0:	e1a01004 	mov	r1, r4
+    83d4:	e1a02005 	mov	r2, r5
+    83d8:	ebffff88 	bl	8200 <DrawCharacter>
+    83dc:	e0844000 	add	r4, r4, r0
+    83e0:	e3a00057 	mov	r0, #87	; 0x57
+    83e4:	e1a01004 	mov	r1, r4
+    83e8:	e1a02005 	mov	r2, r5
+    83ec:	ebffff83 	bl	8200 <DrawCharacter>
+    83f0:	e0844000 	add	r4, r4, r0
+    83f4:	e3a0006f 	mov	r0, #111	; 0x6f
+    83f8:	e1a01004 	mov	r1, r4
+    83fc:	e1a02005 	mov	r2, r5
+    8400:	ebffff7e 	bl	8200 <DrawCharacter>
+    8404:	e0844000 	add	r4, r4, r0
+    8408:	e3a00072 	mov	r0, #114	; 0x72
+    840c:	e1a01004 	mov	r1, r4
+    8410:	e1a02005 	mov	r2, r5
+    8414:	ebffff79 	bl	8200 <DrawCharacter>
+    8418:	e0844000 	add	r4, r4, r0
+    841c:	e3a0006c 	mov	r0, #108	; 0x6c
+    8420:	e1a01004 	mov	r1, r4
+    8424:	e1a02005 	mov	r2, r5
+    8428:	ebffff74 	bl	8200 <DrawCharacter>
+    842c:	e0844000 	add	r4, r4, r0
+    8430:	e3a00064 	mov	r0, #100	; 0x64
+    8434:	e1a01004 	mov	r1, r4
+    8438:	e1a02005 	mov	r2, r5
+    843c:	ebffff6f 	bl	8200 <DrawCharacter>
+    8440:	e0844000 	add	r4, r4, r0
+    8444:	e3a00021 	mov	r0, #33	; 0x21
+    8448:	e1a01004 	mov	r1, r4
+    844c:	e1a02005 	mov	r2, r5
+    8450:	ebffff6a 	bl	8200 <DrawCharacter>
 
-000083ec <loop$>:
-    83ec:	eafffffe 	b	83ec <loop$>
+00008454 <loop$>:
+    8454:	eafffffe 	b	8454 <loop$>
 
-000083f0 <Random>:
-    83f0:	e3a01cef 	mov	r1, #61184	; 0xef00
-    83f4:	e0010190 	mul	r1, r0, r1
-    83f8:	e0010190 	mul	r1, r0, r1
-    83fc:	e0811000 	add	r1, r1, r0
-    8400:	e2810049 	add	r0, r1, #73	; 0x49
-    8404:	e1a0f00e 	mov	pc, lr
+00008458 <Random>:
+    8458:	e3a01cef 	mov	r1, #61184	; 0xef00
+    845c:	e0010190 	mul	r1, r0, r1
+    8460:	e0010190 	mul	r1, r0, r1
+    8464:	e0811000 	add	r1, r1, r0
+    8468:	e2810049 	add	r0, r1, #73	; 0x49
+    846c:	e1a0f00e 	mov	pc, lr
