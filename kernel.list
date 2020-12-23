@@ -213,7 +213,7 @@ Disassembly of section .text:
 00008288 <stringLoop$>:
     8288:	e5d40000 	ldrb	r0, [r4]
     828c:	e2844001 	add	r4, r4, #1
-    8290:	e3300030 	teq	r0, #48	; 0x30
+    8290:	e3300000 	teq	r0, #0
     8294:	0a00000d 	beq	82d0 <stringLoopEnd$>
     8298:	e330000a 	teq	r0, #10
     829c:	01a06005 	moveq	r6, r5

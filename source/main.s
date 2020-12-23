@@ -4,7 +4,6 @@ _start:
     b main
 
 .section .data
-.align 1
 hello:
     .asciz "Hello, World!" /* .asciz adds null */
 
