@@ -31,61 +31,64 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Pi-casso */
-    lastRandom .req r4
-    x .req r5
-    y .req r6
-    colour .req r7
-    lastX .req r8
-    lastY .req r9
+    /* Print "Hello, World!" */
+    c .req r0
+    x .req r1
+    y .req r2
 
-    mov lastRandom,#0
-    mov colour,#0
-    mov lastX,#0
-    mov lastY,#0
-    
-    renderLoop$:
-        /* Generate random position */
-        mov r0, lastRandom
-        bl Random
-        mov x,r0
-        bl Random
-        mov y,r0
-        mov lastRandom,r0
+    mov x,#0
+    mov y,#0
+    mov c,#'H'
+    bl DrawCharacter
 
-        /* Set colour */
-        mov r0,colour
-        bl SetForegroundColour
+    add x,r0
+    mov c,#'e'
+    bl DrawCharacter
 
-        /* Shift new position into range 0-1023 */
-        lsr r2,x,#22
-        lsr r3,y,#22
+    add x,r0
+    mov c,#'l'
+    bl DrawCharacter
 
-        /* Re-select if out of y range */
-        cmp r3,#768
-	    bhs renderLoop$
+    add x,r0
+    mov c,#'l'
+    bl DrawCharacter
 
-        /* Load last position */
-        mov r0,lastX
-	    mov r1,lastY
+    add x,r0
+    mov c,#'o'
+    bl DrawCharacter
 
-        /* Update last position */
-        mov lastX,r2
-	    mov lastY,r3
+    add x,r0
+    mov c,#','
+    bl DrawCharacter
 
-        /* Draw line */
-        bl DrawLine
-        
-        /* Update colour */
-        add colour,#1
-        lsl colour,#16
-        lsr colour,#16
+    add x,r0
+    mov c,#' '
+    bl DrawCharacter
 
-        b renderLoop$
+    add x,r0
+    mov c,#'W'
+    bl DrawCharacter
 
-        .unreq lastRandom
-        .unreq lastX
-        .unreq lastY
-        .unreq x
-        .unreq y
-        .unreq colour
+    add x,r0
+    mov c,#'o'
+    bl DrawCharacter
+
+    add x,r0
+    mov c,#'r'
+    bl DrawCharacter
+
+    add x,r0
+    mov c,#'l'
+    bl DrawCharacter
+
+    add x,r0
+    mov c,#'d'
+    bl DrawCharacter
+
+    add x,r0
+    mov c,#'!'
+    bl DrawCharacter
+
+    /* Loop forever */
+    loop$:
+        b loop$
