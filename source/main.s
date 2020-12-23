@@ -5,7 +5,7 @@ _start:
 
 .section .data
 hello:
-    .asciz "Hello, World!" /* .asciz adds null */
+    .asciz "Hello, World!\nDoes\tTAB\tWork?\n\0HowAboutNULL?" /* .asciz adds null */
 
 .section .text
 main:

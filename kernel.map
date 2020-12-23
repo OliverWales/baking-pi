@@ -69,7 +69,7 @@ LOAD build/random.o
  .text          0x00000000000083d4       0x18 build/random.o
                 0x00000000000083d4                Random
 
-.data           0x00000000000083f0      0x84e
+.data           0x00000000000083f0      0x86c
  *(.data)
  .data          0x00000000000083f0        0x0 build/mailbox.o
  .data          0x00000000000083f0       0x28 build/frameBuffer.o
@@ -78,8 +78,8 @@ LOAD build/random.o
  *fill*         0x0000000000008418        0x8 
  .data          0x0000000000008420      0x810 build/drawing.o
  .data          0x0000000000008c30        0x0 build/gpio.o
- .data          0x0000000000008c30        0xe build/main.o
- .data          0x0000000000008c3e        0x0 build/random.o
+ .data          0x0000000000008c30       0x2c build/main.o
+ .data          0x0000000000008c5c        0x0 build/random.o
 
 /DISCARD/
  *(*)
