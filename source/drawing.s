@@ -247,3 +247,72 @@ DrawCharacter:
     mov r0,#8
     mov r1,#16
     pop {r4,r5,r6,r7,r8,pc}
+
+/*
+* Draw string at address in r0 at position (r1, r2), return width and height drawn
+* NB: Assumes string is null-terminated
+*/
+.globl DrawString
+DrawString:
+    push {r4,r5,r6,r7,r8,r9,lr}
+    charAddr .req r4
+    x0 .req r5
+    x .req r6
+    y .req r7
+    width .req r8
+    height .req r9
+
+    mov charAddr,r0
+    mov x0,r1
+    mov x,r1
+    mov y,r2
+    mov width,#0
+    mov height,#8
+
+    stringLoop$:
+        /* Load next char */
+        char .req r0
+        ldrb char,[charAddr]
+        add charAddr,#1
+
+        /* Handle null terminator */
+        teq char,#'\0'
+        beq stringLoopEnd
+
+        /* Handle line feed */
+        teq char,#'\n'
+        moveq x,x0
+        addeq y,#8
+        addeq height,#8
+        beq stringLoop
+
+        /* Handle tab */
+        teq char,#'\t'
+        addeq width,#32
+        beq stringLoop
+
+        /* Draw character */
+        mov r1,x
+        mov r2,y
+        bl DrawCharacter
+        .unreq char
+        cwidth .req r0
+        add x,cwidth
+        add width,cwidth
+        .unreq cwidth
+
+        b stringLoop$
+
+    stringLoopEnd$:
+
+    /* Return width and height drawn */
+    mov r0,width
+    mov r1,height
+
+    pop {r4,r5,r6,r7,r8,r9,pc}
+    .unreq charAddr
+    .unreq x0
+    .unreq x
+    .unreq y
+    .unreq width
+    .unreq height
