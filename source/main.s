@@ -35,7 +35,7 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Print "Hello, World!" */
+    /* Print "Hello, World!" at (0, 0) */
     ldr r0,=hello
     mov r1,#0
     mov r2,#0

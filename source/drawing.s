@@ -249,25 +249,21 @@ DrawCharacter:
     pop {r4,r5,r6,r7,r8,pc}
 
 /*
-* Draw string at address in r0 at position (r1, r2), return width and height drawn
+* Draw string at address in r0 at position (r1, r2), return final position of cursor
 * NB: Assumes string is null-terminated
 */
 .globl DrawString
 DrawString:
-    push {r4,r5,r6,r7,r8,r9,lr}
+    push {r4,r5,r6,r7,lr}
     charAddr .req r4
     x0 .req r5
     x .req r6
     y .req r7
-    width .req r8
-    height .req r9
 
     mov charAddr,r0
     mov x0,r1
     mov x,r1
     mov y,r2
-    mov width,#0
-    mov height,#16
 
     stringLoop$:
         /* Load next char */
@@ -283,39 +279,36 @@ DrawString:
         teq char,#'\n'
         moveq x,x0
         addeq y,#16
-        addeq height,#16
         beq stringLoop$
 
         /* Handle tab */
         teq char,#'\t'
-        lsreq width,#5 /* Divide by 32 (truncated) */
-        addeq width,#1 /* Add 1 */
-        lsleq width,#5 /* Multiply by 32 */
-        addeq x,x0,width /* Update x position */
+        tabs .req r0
+        sub tabs,x,x0   /* Get relative x position */
+        lsreq tabs,#5   /* Divide by 32 (truncated) */
+        addeq tabs,#1   /* Add 1 */
+        lsleq tabs,#5   /* Multiply by 32 */
+        addeq x,x0,tabs /* Update x position */
+        .unreq tabs
         beq stringLoop$
 
         /* Draw character */
         mov r1,x
         mov r2,y
         bl DrawCharacter
-        .unreq char
-        cwidth .req r0
-        add x,cwidth
-        add width,cwidth
-        .unreq cwidth
+        add x,r0
 
+        .unreq char
         b stringLoop$
 
     stringLoopEnd$:
 
     /* Return width and height drawn */
-    mov r0,width
-    mov r1,height
+    mov r0,x
+    mov r1,y
 
-    pop {r4,r5,r6,r7,r8,r9,pc}
+    pop {r4,r5,r6,r7,pc}
     .unreq charAddr
     .unreq x0
     .unreq x
     .unreq y
-    .unreq width
-    .unreq height
