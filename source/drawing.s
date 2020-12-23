@@ -267,7 +267,7 @@ DrawString:
     mov x,r1
     mov y,r2
     mov width,#0
-    mov height,#8
+    mov height,#16
 
     stringLoop$:
         /* Load next char */
@@ -282,8 +282,8 @@ DrawString:
         /* Handle line feed */
         teq char,#'\n'
         moveq x,x0
-        addeq y,#8
-        addeq height,#8
+        addeq y,#16
+        addeq height,#16
         beq stringLoop$
 
         /* Handle tab */

@@ -208,7 +208,7 @@ Disassembly of section .text:
     8278:	e1a06001 	mov	r6, r1
     827c:	e1a07002 	mov	r7, r2
     8280:	e3a08000 	mov	r8, #0
-    8284:	e3a09008 	mov	r9, #8
+    8284:	e3a09010 	mov	r9, #16
 
 00008288 <stringLoop$>:
     8288:	e5d40000 	ldrb	r0, [r4]
@@ -217,8 +217,8 @@ Disassembly of section .text:
     8294:	0a00000d 	beq	82d0 <stringLoopEnd$>
     8298:	e330000a 	teq	r0, #10
     829c:	01a06005 	moveq	r6, r5
-    82a0:	02877008 	addeq	r7, r7, #8
-    82a4:	02899008 	addeq	r9, r9, #8
+    82a0:	02877010 	addeq	r7, r7, #16
+    82a4:	02899010 	addeq	r9, r9, #16
     82a8:	0afffff6 	beq	8288 <stringLoop$>
     82ac:	e3300009 	teq	r0, #9
     82b0:	02888020 	addeq	r8, r8, #32

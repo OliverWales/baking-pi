@@ -6,7 +6,7 @@ _start:
 .section .data
 .align 1
 hello:
-    .string "Hello, World!" /* .string adds null */
+    .asciz "Hello, World!" /* .asciz adds null */
 
 .section .text
 main:
