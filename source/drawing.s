@@ -292,6 +292,12 @@ DrawString:
         .unreq tabs
         beq stringLoop$
 
+        /* If x > screen width - width of char, wrap to next line */
+        ldr r3,=1018
+        cmp x,r3
+        movhi x,x0
+        addhi y,#16
+
         /* Draw character */
         mov r1,x
         mov r2,y
