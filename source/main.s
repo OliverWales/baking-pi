@@ -38,12 +38,16 @@ main:
 
     /* Test reverse string function */
     ldr r0,=hello
+    mov r1,#0
+    mov r2,#0
     bl DrawString
 
     ldr r0,=hello
     bl ReverseString
 
     ldr r0,=hello
+    mov r1,#0
+    mov r2,#8
     bl DrawString
 
     loop$:
