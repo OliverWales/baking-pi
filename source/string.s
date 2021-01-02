@@ -70,8 +70,8 @@ ReverseString:
         b reverseLoop$
 
     reverseLoopEnd$:
-    mov pc,lr
-
+    pop {lr}
+    
     .unreq start
     .unreq end
     .unreq temp1
