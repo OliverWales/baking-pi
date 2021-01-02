@@ -3,6 +3,11 @@
 _start:
     b main
 
+.section .data
+.align 1
+hello:
+    .string "Hello, World!" /* .string adds null */
+
 .section .text
 main:
     mov sp,#0x8000
@@ -31,18 +36,15 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Load command line tag */
-    mov r0,#9
-    bl FindTag
+    /* Test reverse string function */
+    ldr r0,=hello
+    bl DrawString
 
-    /* Skip length */
-    add r0,#8
+    ldr r0,=hello
+    bl ReverseString
 
-    /* Print at (0, 0) */
-    mov r1,#0
-    mov r2,#0
+    ldr r0,=hello
     bl DrawString
 
     loop$:
         b loop$
-
