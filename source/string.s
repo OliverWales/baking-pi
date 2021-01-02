@@ -69,7 +69,7 @@ ReverseString:
         sub end,#1
         b reverseLoop$
 
-    reverseLoopEnd$
+    reverseLoopEnd$:
     mov pc,lr
 
     .unreq start
