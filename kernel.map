@@ -55,7 +55,7 @@ LOAD build/tags.o
  .init          0x0000000000008000        0x4 build/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x4ec
+.text           0x0000000000008004      0x4f0
  *(.text)
  .text          0x0000000000008004       0x78 build/mailbox.o
                 0x0000000000008004                GetMailboxBase
@@ -80,28 +80,28 @@ LOAD build/tags.o
                 0x0000000000008360                GetGpioBase
                 0x0000000000008368                SetGpioFunction
                 0x00000000000083b8                SetGpio
- .text          0x00000000000083f8       0x98 build/main.o
- .text          0x0000000000008490       0x18 build/random.o
-                0x0000000000008490                Random
- .text          0x00000000000084a8       0x48 build/maths.o
-                0x00000000000084a8                IntDiv
- .text          0x00000000000084f0        0x0 build/tags.o
+ .text          0x00000000000083f8       0x9c build/main.o
+ .text          0x0000000000008494       0x18 build/random.o
+                0x0000000000008494                Random
+ .text          0x00000000000084ac       0x48 build/maths.o
+                0x00000000000084ac                IntDiv
+ .text          0x00000000000084f4        0x0 build/tags.o
 
-.data           0x00000000000084f0      0x8e4
+.data           0x0000000000008500      0x8e4
  *(.data)
- .data          0x00000000000084f0        0x0 build/mailbox.o
- .data          0x00000000000084f0       0x28 build/frameBuffer.o
-                0x00000000000084f0                FrameBufferInfo
- .data          0x0000000000008518        0x0 build/string.o
- .data          0x0000000000008518        0x0 build/systemTimer.o
- *fill*         0x0000000000008518        0x8 
- .data          0x0000000000008520      0x810 build/drawing.o
- .data          0x0000000000008d30        0x0 build/gpio.o
- .data          0x0000000000008d30       0x10 build/main.o
- .data          0x0000000000008d40        0x0 build/random.o
- .data          0x0000000000008d40        0x0 build/maths.o
- .data          0x0000000000008d40       0x94 build/tags.o
-                0x0000000000008d64                FindTag
+ .data          0x0000000000008500        0x0 build/mailbox.o
+ .data          0x0000000000008500       0x28 build/frameBuffer.o
+                0x0000000000008500                FrameBufferInfo
+ .data          0x0000000000008528        0x0 build/string.o
+ .data          0x0000000000008528        0x0 build/systemTimer.o
+ *fill*         0x0000000000008528        0x8 
+ .data          0x0000000000008530      0x810 build/drawing.o
+ .data          0x0000000000008d40        0x0 build/gpio.o
+ .data          0x0000000000008d40       0x10 build/main.o
+ .data          0x0000000000008d50        0x0 build/random.o
+ .data          0x0000000000008d50        0x0 build/maths.o
+ .data          0x0000000000008d50       0x94 build/tags.o
+                0x0000000000008d74                FindTag
 
 /DISCARD/
  *(*)

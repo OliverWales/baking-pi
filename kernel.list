@@ -73,7 +73,7 @@ Disassembly of section .text:
     80cc:	18bd8010 	popne	{r4, pc}
     80d0:	e1a00004 	mov	r0, r4
     80d4:	e8bd8010 	pop	{r4, pc}
-    80d8:	000084f0 	.word	0x000084f0
+    80d8:	00008500 	.word	0x00008500
 
 000080dc <StringLength>:
     80dc:	e3a01000 	mov	r1, #0
@@ -99,7 +99,7 @@ Disassembly of section .text:
     8114:	e2400001 	sub	r0, r0, #1
 
 00008118 <reverseLoop$>:
-    8118:	e1500001 	cmp	r0, r1
+    8118:	e1510000 	cmp	r1, r0
     811c:	aa000006 	bge	813c <reverseLoopEnd$>
     8120:	e5d12000 	ldrb	r2, [r1]
     8124:	e5d03000 	ldrb	r3, [r0]
@@ -275,9 +275,9 @@ Disassembly of section .text:
     8344:	e1a00006 	mov	r0, r6
     8348:	e1a01007 	mov	r1, r7
     834c:	e8bd80f0 	pop	{r4, r5, r6, r7, pc}
-    8350:	00008520 	.word	0x00008520
-    8354:	00008524 	.word	0x00008524
-    8358:	00008530 	.word	0x00008530
+    8350:	00008530 	.word	0x00008530
+    8354:	00008534 	.word	0x00008534
+    8358:	00008540 	.word	0x00008540
     835c:	000003fa 	.word	0x000003fa
 
 00008360 <GetGpioBase>:
@@ -346,64 +346,65 @@ Disassembly of section .text:
 
 00008430 <noError$>:
     8430:	ebffff57 	bl	8194 <SetGraphicsAddress>
-    8434:	e59f004c 	ldr	r0, [pc, #76]	; 8488 <loop$+0x4>
+    8434:	e59f0050 	ldr	r0, [pc, #80]	; 848c <loop$+0x4>
     8438:	e3a01000 	mov	r1, #0
     843c:	e3a02000 	mov	r2, #0
     8440:	ebffffa2 	bl	82d0 <DrawString>
-    8444:	e59f003c 	ldr	r0, [pc, #60]	; 8488 <loop$+0x4>
+    8444:	e59f0040 	ldr	r0, [pc, #64]	; 848c <loop$+0x4>
     8448:	ebffff23 	bl	80dc <StringLength>
     844c:	e1a04000 	mov	r4, r0
 
 00008450 <lenLoop$>:
     8450:	e2812010 	add	r2, r1, #16
     8454:	e3a01000 	mov	r1, #0
-    8458:	e59f002c 	ldr	r0, [pc, #44]	; 848c <loop$+0x8>
+    8458:	e59f0030 	ldr	r0, [pc, #48]	; 8490 <loop$+0x8>
     845c:	ebffff9b 	bl	82d0 <DrawString>
     8460:	e2444001 	sub	r4, r4, #1
     8464:	e3540000 	cmp	r4, #0
     8468:	cafffff8 	bgt	8450 <lenLoop$>
-    846c:	e59f0014 	ldr	r0, [pc, #20]	; 8488 <loop$+0x4>
-    8470:	ebffff22 	bl	8100 <ReverseString>
-    8474:	e2812010 	add	r2, r1, #16
-    8478:	e3a01000 	mov	r1, #0
-    847c:	e59f0004 	ldr	r0, [pc, #4]	; 8488 <loop$+0x4>
-    8480:	ebffff92 	bl	82d0 <DrawString>
+    846c:	e1a04001 	mov	r4, r1
+    8470:	e59f0014 	ldr	r0, [pc, #20]	; 848c <loop$+0x4>
+    8474:	ebffff21 	bl	8100 <ReverseString>
+    8478:	e2842010 	add	r2, r4, #16
+    847c:	e3a01000 	mov	r1, #0
+    8480:	e59f0004 	ldr	r0, [pc, #4]	; 848c <loop$+0x4>
+    8484:	ebffff91 	bl	82d0 <DrawString>
 
-00008484 <loop$>:
-    8484:	eafffffe 	b	8484 <loop$>
-    8488:	00008d30 	.word	0x00008d30
-    848c:	00008d3e 	.word	0x00008d3e
+00008488 <loop$>:
+    8488:	eafffffe 	b	8488 <loop$>
+    848c:	00008d40 	.word	0x00008d40
+    8490:	00008d4e 	.word	0x00008d4e
 
-00008490 <Random>:
-    8490:	e3a01cef 	mov	r1, #61184	; 0xef00
-    8494:	e0010190 	mul	r1, r0, r1
+00008494 <Random>:
+    8494:	e3a01cef 	mov	r1, #61184	; 0xef00
     8498:	e0010190 	mul	r1, r0, r1
-    849c:	e0811000 	add	r1, r1, r0
-    84a0:	e2810049 	add	r0, r1, #73	; 0x49
-    84a4:	e1a0f00e 	mov	pc, lr
+    849c:	e0010190 	mul	r1, r0, r1
+    84a0:	e0811000 	add	r1, r1, r0
+    84a4:	e2810049 	add	r0, r1, #73	; 0x49
+    84a8:	e1a0f00e 	mov	pc, lr
 
-000084a8 <IntDiv>:
-    84a8:	e16f2f11 	clz	r2, r1
-    84ac:	e16f3f10 	clz	r3, r0
-    84b0:	e0522003 	subs	r2, r2, r3
-    84b4:	e1a03211 	lsl	r3, r1, r2
-    84b8:	e1a01000 	mov	r1, r0
-    84bc:	e3a00000 	mov	r0, #0
-    84c0:	ba000009 	blt	84ec <intDivLoopReturn$>
+000084ac <IntDiv>:
+    84ac:	e16f2f11 	clz	r2, r1
+    84b0:	e16f3f10 	clz	r3, r0
+    84b4:	e0522003 	subs	r2, r2, r3
+    84b8:	e1a03211 	lsl	r3, r1, r2
+    84bc:	e1a01000 	mov	r1, r0
+    84c0:	e3a00000 	mov	r0, #0
+    84c4:	ba000009 	blt	84f0 <intDivLoopReturn$>
 
-000084c4 <intDivLoop$>:
-    84c4:	e1510003 	cmp	r1, r3
-    84c8:	ba000003 	blt	84dc <intDivLoopContinue$>
-    84cc:	e2800001 	add	r0, r0, #1
-    84d0:	e0511003 	subs	r1, r1, r3
-    84d4:	01a00210 	lsleq	r0, r0, r2
-    84d8:	0a000003 	beq	84ec <intDivLoopReturn$>
+000084c8 <intDivLoop$>:
+    84c8:	e1510003 	cmp	r1, r3
+    84cc:	ba000003 	blt	84e0 <intDivLoopContinue$>
+    84d0:	e2800001 	add	r0, r0, #1
+    84d4:	e0511003 	subs	r1, r1, r3
+    84d8:	01a00210 	lsleq	r0, r0, r2
+    84dc:	0a000003 	beq	84f0 <intDivLoopReturn$>
 
-000084dc <intDivLoopContinue$>:
-    84dc:	e2522001 	subs	r2, r2, #1
-    84e0:	a1a030a3 	lsrge	r3, r3, #1
-    84e4:	a1a00080 	lslge	r0, r0, #1
-    84e8:	aafffff5 	bge	84c4 <intDivLoop$>
+000084e0 <intDivLoopContinue$>:
+    84e0:	e2522001 	subs	r2, r2, #1
+    84e4:	a1a030a3 	lsrge	r3, r3, #1
+    84e8:	a1a00080 	lslge	r0, r0, #1
+    84ec:	aafffff5 	bge	84c8 <intDivLoop$>
 
-000084ec <intDivLoopReturn$>:
-    84ec:	e1a0f00e 	mov	pc, lr
+000084f0 <intDivLoopReturn$>:
+    84f0:	e1a0f00e 	mov	pc, lr
