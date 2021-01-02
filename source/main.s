@@ -65,12 +65,14 @@ main:
         cmp r4,#0
         bgt lenLoop$
 
+    mov r4,r1
+
     /* Test reverse string function */
     ldr r0,=hello
     bl ReverseString
 
     /* New line */
-    add r2,r1,#16 /* y = lastY + 16 */
+    add r2,r4,#16 /* y = lastY + 16 */
     mov r1,#0 /* x = 0 */
 
     /* Print "Hello, World!" reversed */

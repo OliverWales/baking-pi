@@ -54,7 +54,7 @@ ReverseString:
 
     reverseLoop$:
     /* While start < end */
-        cmp end,start
+        cmp start,end
         bge reverseLoopEnd$
 
         /* Swap chars */
@@ -71,7 +71,7 @@ ReverseString:
 
     reverseLoopEnd$:
     pop {lr}
-    
+
     .unreq start
     .unreq end
     .unreq temp1
