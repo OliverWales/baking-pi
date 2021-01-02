@@ -110,7 +110,7 @@ Disassembly of section .text:
     8138:	eafffff6 	b	8118 <reverseLoop$>
 
 0000813c <reverseLoopEnd$>:
-    813c:	e1a0f00e 	mov	pc, lr
+    813c:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
 
 00008140 <GetSystemTimerAddress>:
     8140:	e59f0034 	ldr	r0, [pc, #52]	; 817c <loop$+0x14>
