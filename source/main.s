@@ -39,7 +39,7 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-
+    /* Print "Hello, World!" */
     ldr r0,=hello
     mov r1,#0
     mov r2,#0
@@ -48,7 +48,7 @@ main:
     /* Test string length function */
     ldr r0,=hello
     bl StringLength
-    mov r0,r4
+    mov r4,r0
 
     /* While r4 > 0 */
     lenLoop$:
@@ -60,7 +60,7 @@ main:
         ldr r0,=dash
         bl DrawString
 
-        /*  */
+        /* Decrement r4 */
         sub r4,#1
         cmp r4,#0
         bgt lenLoop$
