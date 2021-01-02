@@ -7,6 +7,9 @@ _start:
 .align 1
 hello:
     .string "Hello, World!" /* .string adds null */
+.align 1
+dash:
+    .string "-" /* .string adds null */
 
 .section .text
 main:
@@ -36,18 +39,42 @@ main:
     noError$:
     bl SetGraphicsAddress
 
-    /* Test reverse string function */
+
     ldr r0,=hello
     mov r1,#0
     mov r2,#0
     bl DrawString
 
+    /* Test string length function */
+    ldr r0,=hello
+    bl StringLength
+    mov r0,r4
+
+    /* While r4 > 0 */
+    lenLoop$:
+        /* New line */
+        add r2,r1,#16 /* y = lastY + 16 */
+        mov r1,#0 /* x = 0 */
+
+        /* Print '-' */
+        ldr r0,=dash
+        bl DrawString
+
+        /*  */
+        sub r4,#1
+        cmp r4,#0
+        bgt lenLoop$
+
+    /* Test reverse string function */
     ldr r0,=hello
     bl ReverseString
 
+    /* New line */
+    add r2,r1,#16 /* y = lastY + 16 */
+    mov r1,#0 /* x = 0 */
+
+    /* Print "Hello, World!" reversed */
     ldr r0,=hello
-    mov r1,#0
-    mov r2,#8
     bl DrawString
 
     loop$:
