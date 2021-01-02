@@ -352,7 +352,7 @@ Disassembly of section .text:
     8440:	ebffffa2 	bl	82d0 <DrawString>
     8444:	e59f003c 	ldr	r0, [pc, #60]	; 8488 <loop$+0x4>
     8448:	ebffff23 	bl	80dc <StringLength>
-    844c:	e1a00004 	mov	r0, r4
+    844c:	e1a04000 	mov	r4, r0
 
 00008450 <lenLoop$>:
     8450:	e2812010 	add	r2, r1, #16
