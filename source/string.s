@@ -49,33 +49,26 @@ ReverseString:
     sub end,#1
 
     .unreq addr
-    temp1 .req r2
-    temp2 .req r3
 
     reverseLoop$:
     /* While start < end */
-        cmp start,end
-        bge reverseLoopEnd$
+        cmp end,start
+        popls {lr}
 
         /* Swap chars */
-        ldrb temp1,[start]
-        ldrb temp2,[end]
+        ldrb r2,[start]
+        ldrb r3,[end]
 
-        strb temp1,[end]
-        strb temp2,[start]
+        strb r2,[end]
+        strb r3,[start]
 
         /* Update pointers */
         add start,#1
         sub end,#1
         b reverseLoop$
 
-    reverseLoopEnd$:
-    pop {lr}
-
     .unreq start
     .unreq end
-    .unreq temp1
-    .unreq temp2
 
 /*
 * TODO: void StringCopy(src, addr) 

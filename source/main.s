@@ -9,7 +9,7 @@ hello:
     .string "Hello, World!" /* .string adds null */
 .align 1
 dash:
-    .string "-" /* .string adds null */
+    .string "-"
 
 .section .text
 main:
